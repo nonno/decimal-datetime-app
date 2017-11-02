@@ -1,6 +1,6 @@
 # Decimal DateTime for Android and iOS
 
-Analogic watch for Android and iOS, based on Xamarin Forms, which shows instead of the normal 12 hours/60 minutes a "revolutionary" decimal time.
+Analogical watch for Android and iOS, based on Xamarin Forms, which shows instead of the normal 12 hours/60 minutes a "revolutionary" decimal time.
 
 ![watch](readme/screenshot.png)
 
