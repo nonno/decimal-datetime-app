@@ -46,7 +46,7 @@ namespace DecimalTime.Forms.Pages
             infoButton.Image = "help.png";
 
             absoluteLayout.Children.Add(infoButton);
-            infoButton.Clicked += DayButton_Clicked;
+            infoButton.Clicked += InfoButton_Clicked;
 
             settingsButton = new Button();
             settingsButton.BackgroundColor = Color.Transparent;
@@ -74,6 +74,8 @@ namespace DecimalTime.Forms.Pages
 
         private async void SettingsButton_Clicked(object sender, EventArgs e)
         {
+            IoC.Analytics.LogEvent(AnalyticsService.Action.OpenSettings);
+
             Action refresh = () => {
                 dayLabel.Text = Pallettaro.Revo.DateTime.Now.ToString(FormatSettings.ShortFormat);
             };
@@ -82,8 +84,10 @@ namespace DecimalTime.Forms.Pages
 
         }
 
-        private void DayButton_Clicked(object sender, EventArgs e)
+        private void InfoButton_Clicked(object sender, EventArgs e)
         {
+            IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
+
             var repTime = Pallettaro.Revo.DateTime.Now;
             DisplayAlert("Data estesa", repTime.ToString(FormatSettings.LongFormat), "ok");
         }

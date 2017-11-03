@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "763949901853",
+    "firebase_url": "https://decimal-time.firebaseio.com",
+    "project_id": "decimal-time",
+    "storage_bucket": "decimal-time.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:763949901853:android:e1b2aeefd3fa5a69",
+        "android_client_info": {
+          "package_name": "it.mpic.decimaltime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "763949901853-3g6vovmj2sg2s862ri7o5nktaf3ob4o4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "it.mpic.decimaltime",
+            "certificate_hash": "6a0ef3836ca72865c3c68c6ba8e91de71224e649"
+          }
+        },
+        {
+          "client_id": "763949901853-018b7ieth0vn6jptahmj94brd6k0fo9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA0VSwTtEU7KVwG7X3ga-3t9LAgEw1qlU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "763949901853-t59nulgcps15ha76q2437uelq1t8qspt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "it.mpic.decimaltime"
+              }
+            },
+            {
+              "client_id": "763949901853-018b7ieth0vn6jptahmj94brd6k0fo9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

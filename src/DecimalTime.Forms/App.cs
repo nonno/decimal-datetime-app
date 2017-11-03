@@ -8,11 +8,7 @@ namespace DecimalTime.Forms
     {
         public App()
         {
-            if (Device.RuntimePlatform == Device.Android) {
-                MainPage = new DecimalTimePage(); // eventuale splash
-            } else {
-                MainPage = new DecimalTimePage();
-            }
+            MainPage = new DecimalTimePage();
         }
     }
 }
