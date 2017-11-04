@@ -13,7 +13,6 @@ namespace DecimalTime.Forms.Pages
 
         private Label dayNameLabel;
         private Label dayLabel;
-        private Button infoButton;
         private Button settingsButton;
         private ClockView clockView;
         private Image backgroundImage;
@@ -40,14 +39,6 @@ namespace DecimalTime.Forms.Pages
             clockView = new ClockView();
             absoluteLayout.Children.Add(clockView);
 
-            infoButton = new Button();
-            infoButton.BackgroundColor = Color.Transparent;
-            infoButton.BorderColor = Color.Transparent;
-            infoButton.Image = "help.png";
-
-            absoluteLayout.Children.Add(infoButton);
-            infoButton.Clicked += InfoButton_Clicked;
-
             settingsButton = new Button();
             settingsButton.BackgroundColor = Color.Transparent;
             settingsButton.BorderColor = Color.Transparent;
@@ -55,7 +46,6 @@ namespace DecimalTime.Forms.Pages
 
             absoluteLayout.Children.Add(settingsButton);
             settingsButton.Clicked += SettingsButton_Clicked;
-
 
             dayLabel = new Label();
             dayLabel.FontSize = 30;
@@ -70,6 +60,11 @@ namespace DecimalTime.Forms.Pages
 
             Device.StartTimer(TimeSpan.FromMilliseconds(timerPeriod), OnTimerTick);
             SizeChanged += OnPageSizeChanged;
+
+            var doubleTapGestureRecognizer = new TapGestureRecognizer();
+            doubleTapGestureRecognizer.NumberOfTapsRequired = 2;
+            doubleTapGestureRecognizer.Tapped += Page_DoubleTapped;
+            absoluteLayout.GestureRecognizers.Add(doubleTapGestureRecognizer);
         }
 
         private async void SettingsButton_Clicked(object sender, EventArgs e)
@@ -84,12 +79,12 @@ namespace DecimalTime.Forms.Pages
 
         }
 
-        private void InfoButton_Clicked(object sender, EventArgs e)
+        private void Page_DoubleTapped(object sender, EventArgs e)
         {
             IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
 
             var repTime = Pallettaro.Revo.DateTime.Now;
-            DisplayAlert("Data estesa", repTime.ToString(FormatSettings.LongFormat), "ok");
+            DisplayAlert(String.Empty, repTime.ToString(FormatSettings.LongFormat), "ok");
         }
 
         private void OnPageSizeChanged(object sender, EventArgs args)
@@ -99,14 +94,12 @@ namespace DecimalTime.Forms.Pages
                 AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, Width / 2, Width, Width));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 15, Width, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 55, Width, 40));
-                AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
                 AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(0, Height - 70, 70, 70));
             } else {
                 AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, 2 * Height));
                 AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width - Height, 0, Height, Height));
                 AbsoluteLayout.SetLayoutBounds(dayLabel, new Rectangle(0, 5, Width / 2, 40));
                 AbsoluteLayout.SetLayoutBounds(dayNameLabel, new Rectangle(0, 45, Width / 2, 40));
-                AbsoluteLayout.SetLayoutBounds(infoButton, new Rectangle(Width - 70, Height - 70, 70, 70));
                 AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(0, Height - 70, 70, 70));
             }
             this.clockView.OnPageSizeChanged(sender, args);

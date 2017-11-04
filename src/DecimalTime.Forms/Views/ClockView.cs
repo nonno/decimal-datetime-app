@@ -23,7 +23,7 @@ namespace DecimalTime.Forms.Views
         static readonly HandParams minuteParams = new HandParams(0.05, 0.8, 0.9);
         static readonly HandParams hourParams = new HandParams(0.125, 0.65, 0.9);
 
-        static readonly Color tickMarksColor = Color.Accent;
+        static readonly Color tickMarksColor = Color.White;
         static readonly Color handsHourColor = Color.FromRgb(0.501960813999176, 0.796078443527222, 0.768627464771271);
         static readonly Color handsMinuteColor = Color.FromRgb(0.601960813999176, 0.796078443527222, 0.768627464771271);
         static readonly Color handsSecondColor = Color.FromRgb(0.701960813999176, 0.796078443527222, 0.768627464771271);

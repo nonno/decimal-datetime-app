@@ -154,7 +154,6 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\Drawable\Icon.png" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\Drawable\splashscreen.xml" />
@@ -174,7 +173,6 @@
     <AndroidResource Include="Resources\Drawable\m09.jpg" />
     <AndroidResource Include="Resources\Drawable\m10.jpg" />
     <AndroidResource Include="Resources\Drawable\m11.jpg" />
-    <AndroidResource Include="Resources\Drawable\help.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\Icon.png" />

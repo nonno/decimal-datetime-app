@@ -8,7 +8,7 @@
     <ProjectGuid>{063695F1-B3BA-459A-8E99-B86B8A601966}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BoxViewClock.iOS</RootNamespace>
+    <RootNamespace>DecimalTime.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>FormsTemplateiOS</AssemblyName>
     <NuGetPackageImportStamp>a752278a</NuGetPackageImportStamp>
@@ -145,7 +145,6 @@
     <BundleResource Include="Resources\m11.jpg" />
     <BundleResource Include="Resources\m12.jpg" />
     <BundleResource Include="Resources\m13.jpg" />
-    <BundleResource Include="Resources\help.png" />
     <BundleResource Include="GoogleService-Info.plist" />
   </ItemGroup>
   <ItemGroup>
