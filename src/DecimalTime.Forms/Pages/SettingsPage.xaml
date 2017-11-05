@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-     x:Class="DecimalTime.Forms.Pages.SettingsPage"
-     Title="Settings">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DecimalTime.Forms.Pages.SettingsPage"
+    xmlns:i18n="clr-namespace:DecimalTime.Forms.Utils;assembly=DecimalTime.Forms"
+    Title="{i18n:Translate lblSettingsPageTitle}">
     
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
@@ -13,12 +14,12 @@
     </ContentPage.Padding>
     
     <StackLayout Spacing="10">
-        <Label Text="Formato data breve"/>
+        <Label Text="{i18n:Translate lblDateFormatShort}"/>
         <Entry x:Name="Short" TextChanged="Short_Changed" MeasureInvalidated="Short_Added" />
             
-        <Label Text="Formato data estesa"/>
+        <Label Text="{i18n:Translate lblDateFormatLong}"/>
         <Editor x:Name="Long" TextChanged="Long_Changed" MeasureInvalidated="Long_Added" HeightRequest="80" />
 
-        <Button Text="Chiudi" Clicked="DismissButton_Clicked" />
+        <Button Text="{i18n:Translate btnClose}" Clicked="DismissButton_Clicked" />
     </StackLayout>
 </ContentPage>

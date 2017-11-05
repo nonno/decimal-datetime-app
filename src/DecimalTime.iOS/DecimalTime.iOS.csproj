@@ -89,6 +89,7 @@
     <None Include="packages.config" />
     <None Include="xamarin_upload_symbols.sh" />
     <Compile Include="Utils\FirebaseAnalyticsService.cs" />
+    <Compile Include="Utils\Localize.cs" />
   </ItemGroup>
   <ItemGroup></ItemGroup>
   <ItemGroup>

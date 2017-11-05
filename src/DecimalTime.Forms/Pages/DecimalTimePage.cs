@@ -1,4 +1,5 @@
 ﻿using System;
+using DecimalTime.Forms.i18n;
 using DecimalTime.Forms.Utils;
 using DecimalTime.Forms.Views;
 using Xamarin.Forms;
@@ -44,7 +45,7 @@ namespace DecimalTime.Forms.Pages
             settingsButton = new Button {
                 BackgroundColor = Color.Transparent,
                 BorderColor = Color.Transparent,
-                Image = "Icon.png"
+                Image = AppAssets.settingsIco
             };
             settingsButton.Clicked += SettingsButton_Clicked;
 
@@ -127,7 +128,7 @@ namespace DecimalTime.Forms.Pages
             IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
 
             var repTime = Pallettaro.Revo.DateTime.Now;
-            DisplayAlert(String.Empty, repTime.ToString(FormatSettings.LongFormat), "ok");
+            DisplayAlert(String.Empty, repTime.ToString(FormatSettings.LongFormat), AppStrings.ok);
         }
 
         private void OnPageSizeChanged(object sender, EventArgs args)

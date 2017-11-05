@@ -146,6 +146,7 @@
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Utils\FirebaseAnalyticsService.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="Utils\Localize.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

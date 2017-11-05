@@ -30,10 +30,17 @@
     <Folder Include="Pages\" />
     <Folder Include="Views\" />
     <Folder Include="Utils\" />
+    <Folder Include="i18n\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="i18n\AppAssets.Designer.cs">
+      <DependentUpon>AppAssets.resx</DependentUpon>
+    </Compile>
+    <Compile Include="i18n\AppStrings.Designer.cs">
+      <DependentUpon>AppStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\DecimalTimePage.cs" />
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -67,6 +74,14 @@
   <ItemGroup>
     <EmbeddedResource Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\AppAssets.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppAssets.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\AppStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
