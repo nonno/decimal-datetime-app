@@ -1,11 +1,12 @@
 ﻿using System;
+using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
 namespace DecimalTime.Forms.Views
 {
     public class ClockView : AbsoluteLayout
     {
-        struct HandParams
+        private struct HandParams
         {
             public HandParams(double width, double height, double offset) : this()
             {
@@ -23,11 +24,6 @@ namespace DecimalTime.Forms.Views
         static readonly HandParams minuteParams = new HandParams(0.05, 0.8, 0.9);
         static readonly HandParams hourParams = new HandParams(0.125, 0.65, 0.9);
 
-        static readonly Color tickMarksColor = Color.White;
-        static readonly Color handsHourColor = Color.FromRgb(0.501960813999176, 0.796078443527222, 0.768627464771271);
-        static readonly Color handsMinuteColor = Color.FromRgb(0.601960813999176, 0.796078443527222, 0.768627464771271);
-        static readonly Color handsSecondColor = Color.FromRgb(0.701960813999176, 0.796078443527222, 0.768627464771271);
-
         private BoxView[] tickMarks = new BoxView[100];
         private BoxView secondHand, minuteHand, hourHand;
 
@@ -35,30 +31,24 @@ namespace DecimalTime.Forms.Views
         {
             base.OnBindingContextChanged();
         }
+
         protected override void OnParentSet()
         {
             // Create the tick marks (to be sized and positioned later)
+            var tickMarksColor = Color.FromHex(Styles.TickMarksColor);
             for (int i = 0; i < tickMarks.Length; i++) {
-                tickMarks[i] = new BoxView {
-                    Color = tickMarksColor
-                };
+                tickMarks[i] = new BoxView { Color = tickMarksColor };
                 this.Children.Add(tickMarks[i]);
             }
+
             // Create the three hands.
-            this.Children.Add(hourHand =
-                new BoxView {
-                    Color = handsHourColor
-                });
-            this.Children.Add(minuteHand =
-                new BoxView {
-                    Color = handsMinuteColor
-                });
-            this.Children.Add(secondHand =
-                new BoxView {
-                    Color = handsSecondColor
-                });
+            this.Children.Add(hourHand = new BoxView { Color = Color.FromHex(Styles.HoursHandColor) });
+            this.Children.Add(minuteHand = new BoxView { Color = Color.FromHex(Styles.MinutesHandColor) });
+            this.Children.Add(secondHand = new BoxView { Color = Color.FromHex(Styles.SecondsHandColor) });
+
             base.OnParentSet();
         }
+
         public void OnPageSizeChanged(object sender, EventArgs args)
         {
             // Size and position the 12 tick marks.
@@ -78,7 +68,7 @@ namespace DecimalTime.Forms.Views
             }
 
             // Function for positioning and sizing hands.
-            Action<BoxView, HandParams> Layout = (boxView, handParams) => {
+            Action<BoxView, HandParams> HandLayout = (boxView, handParams) => {
                 double width = handParams.Width * radius;
                 double height = handParams.Height * radius;
                 double offset = handParams.Offset;
@@ -92,9 +82,9 @@ namespace DecimalTime.Forms.Views
                 boxView.AnchorY = handParams.Offset;
             };
 
-            Layout(secondHand, secondParams);
-            Layout(minuteHand, minuteParams);
-            Layout(hourHand, hourParams);
+            HandLayout(secondHand, secondParams);
+            HandLayout(minuteHand, minuteParams);
+            HandLayout(hourHand, hourParams);
         }
         public bool OnTimerTick()
         {
