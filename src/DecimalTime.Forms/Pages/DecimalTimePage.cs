@@ -34,8 +34,15 @@ namespace DecimalTime.Forms.Pages
                 Aspect = Aspect.AspectFill
             };
 
+            dateLabel = new Label() {
+                FontSize = 25,
+                TextColor = Color.FromHex(Styles.DateLabelColor),
+                VerticalTextAlignment = TextAlignment.Center,
+                HorizontalTextAlignment = TextAlignment.Center,
+                Text = repTime.ToString(FormatSettings.ShortFormat)
+            };
             dateNameLabel = new Label {
-                FontSize = 30,
+                FontSize = 25,
                 TextColor = Color.FromHex(Styles.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center,
@@ -48,14 +55,6 @@ namespace DecimalTime.Forms.Pages
                 Image = AppAssets.settingsIco
             };
             settingsButton.Clicked += SettingsButton_Clicked;
-
-            dateLabel = new Label() {
-                FontSize = 30,
-                TextColor = Color.FromHex(Styles.DateLabelColor),
-                VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                Text = repTime.ToString(FormatSettings.ShortFormat)
-            };
 
             contentContainer.Children.Add(backgroundImage);
             contentContainer.Children.Add(clockView);
@@ -80,22 +79,29 @@ namespace DecimalTime.Forms.Pages
 
         private void SetControlsPositions()
         {
-            int labelsHeight = 40;
+            int labelsHeight = 30;
             int labelsYOffset = 15;
-            int settingsSize = 70;
+            int settingsSize = 50;
+            int settingsMargin = 5;
 
             if (Height > Width) {
+                double clockSize = Width;
+                double clockViewY = Height / 2 - clockSize / 2;
+
                 AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, Height));
-                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, Width / 2, Width, Width));
+                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(0, clockViewY, clockSize, clockSize));
                 AbsoluteLayout.SetLayoutBounds(dateLabel, new Rectangle(0, labelsYOffset, Width, labelsHeight));
                 AbsoluteLayout.SetLayoutBounds(dateNameLabel, new Rectangle(0, labelsYOffset + labelsHeight, Width, labelsHeight));
             } else {
+                double clockSize = Height;
+                double clockViewX = Width - clockSize;
+
                 AbsoluteLayout.SetLayoutBounds(backgroundImage, new Rectangle(0, 0, Width, 2 * Height));
-                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(Width - Height, 0, Height, Height));
+                AbsoluteLayout.SetLayoutBounds(clockView, new Rectangle(clockViewX, 0, clockSize, clockSize));
                 AbsoluteLayout.SetLayoutBounds(dateLabel, new Rectangle(0, labelsYOffset, Width / 2, labelsHeight));
                 AbsoluteLayout.SetLayoutBounds(dateNameLabel, new Rectangle(0, labelsYOffset + labelsHeight, Width / 2, labelsHeight));
             }
-            AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(0, Height - settingsSize, settingsSize, settingsSize));
+            AbsoluteLayout.SetLayoutBounds(settingsButton, new Rectangle(settingsMargin, Height - settingsSize - settingsMargin, settingsSize, settingsSize));
         }
 
         protected override void OnAppearing()
