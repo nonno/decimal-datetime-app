@@ -5,16 +5,16 @@
     </data>
 
     <data name="btnClose" xml:space="preserve">
-        <value>Chiudi</value>
+        <value>Close</value>
     </data>
     <data name="lblDateFormatLong" xml:space="preserve">
-        <value>Formato data estesa</value>
+        <value>Long format</value>
     </data>
     <data name="lblDateFormatShort" xml:space="preserve">
-        <value>Formato data breve</value>
+        <value>Short format</value>
     </data>
     <data name="lblSettingsPageTitle" xml:space="preserve">
-        <value>Impostazioni</value>
+        <value>Settings</value>
     </data>
 	
 	<resheader name="resmimetype">

@@ -159,6 +159,8 @@
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\Drawable\splashscreen.xml" />
     <AndroidResource Include="Resources\values\strings.xml" />
+    <AndroidResource Include="Resources\values-it\strings.xml" />
+    <AndroidResource Include="Resources\values-fr\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Drawable\m01.jpg" />
@@ -185,6 +187,8 @@
   <ItemGroup>
     <Folder Include="Resources\values\" />
     <Folder Include="Utils\" />
+    <Folder Include="Resources\values-it\" />
+    <Folder Include="Resources\values-fr\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DecimalTime.Forms\DecimalTime.Forms.csproj">

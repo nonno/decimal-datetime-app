@@ -42,7 +42,9 @@
 	</array>
 	<key>CFBundleLocalizations</key>
 	<array>
+		<string>en</string>
 		<string>it</string>
+		<string>fr</string>
 	</array>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
