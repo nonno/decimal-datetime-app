@@ -15,7 +15,7 @@ namespace DecimalTime.Forms
                 DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
             }
 
-            MainPage = new DecimalTimePage();
+            MainPage = new MainPage();
         }
     }
 }

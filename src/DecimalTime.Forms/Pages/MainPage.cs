@@ -6,31 +6,42 @@ using Xamarin.Forms;
 
 namespace DecimalTime.Forms.Pages
 {
-    class DecimalTimePage : ContentPage
+    class MainPage : ContentPage
     {
         private readonly int timerPeriod = Convert.ToInt32(Pallettaro.Revo.DateTime.SECONDS_RATIO * 500);
 
-        private readonly AbsoluteLayout contentContainer;
+        private AbsoluteLayout contentContainer;
 
-        private readonly Label dateLabel;
-        private readonly Label dateNameLabel;
+        private Label dateLabel;
+        private Label dateNameLabel;
 
-        private readonly ClockView clockView;
-        private readonly Image backgroundImage;
-        private readonly Button settingsButton;
+        private ClockView clockView;
+        private Image backgroundImage;
+        private Button settingsButton;
+
+        private bool firstTick = true;
 
         private readonly TapGestureRecognizer pageDoubleTapRecognizer;
 
-        public DecimalTimePage()
+        public MainPage()
         {
-            var repTime = Pallettaro.Revo.DateTime.Now;
+            SetupControls();
 
+            pageDoubleTapRecognizer = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
+            pageDoubleTapRecognizer.Tapped += Page_DoubleTapped;
+
+            SizeChanged += OnPageSizeChanged;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(timerPeriod), OnTimerTick);
+        }
+
+        private void SetupControls()
+        {
             contentContainer = new AbsoluteLayout();
 
             clockView = new ClockView();
 
             backgroundImage = new Image {
-                Source = $"m{repTime.RepublicanMonth.ToString("00")}.jpg",
                 Aspect = Aspect.AspectFill
             };
 
@@ -38,15 +49,13 @@ namespace DecimalTime.Forms.Pages
                 FontSize = 25,
                 TextColor = Color.FromHex(Styles.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                Text = repTime.ToString(FormatSettings.ShortFormat)
+                HorizontalTextAlignment = TextAlignment.Center
             };
             dateNameLabel = new Label {
                 FontSize = 25,
                 TextColor = Color.FromHex(Styles.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
-                HorizontalTextAlignment = TextAlignment.Center,
-                Text = repTime.DayName
+                HorizontalTextAlignment = TextAlignment.Center
             };
 
             settingsButton = new Button {
@@ -62,22 +71,18 @@ namespace DecimalTime.Forms.Pages
             contentContainer.Children.Add(dateLabel);
             contentContainer.Children.Add(settingsButton);
 
-            if (this.IsSquare()){
+            if (this.IsSquare()) {
                 dateNameLabel.IsVisible = false;
                 dateLabel.IsVisible = false;
             }
+            if (true) { // TODO settings temporary disabled (not ready for production)
+                settingsButton.IsVisible = false;
+            }
 
             this.Content = contentContainer;
-
-            this.SizeChanged += OnPageSizeChanged;
-
-            pageDoubleTapRecognizer = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
-            pageDoubleTapRecognizer.Tapped += Page_DoubleTapped;
-
-            Device.StartTimer(TimeSpan.FromMilliseconds(timerPeriod), OnTimerTick);
         }
 
-        private void SetControlsPositions()
+        private void SetupControlsPositions()
         {
             int labelsHeight = 30;
             int labelsYOffset = 15;
@@ -107,6 +112,8 @@ namespace DecimalTime.Forms.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            OnTimerTick();
 
             this.contentContainer.GestureRecognizers.Add(pageDoubleTapRecognizer);
         }
@@ -139,24 +146,29 @@ namespace DecimalTime.Forms.Pages
 
         private void OnPageSizeChanged(object sender, EventArgs args)
         {
-            SetControlsPositions();
+            SetupControlsPositions();
 
             this.clockView.OnPageSizeChanged(sender, args);
         }
 
         private bool OnTimerTick()
         {
-            var repTime = Pallettaro.Revo.DateTime.Now;
-            var changeDay = repTime.RepublicanHours.Equals(0) && repTime.RepublicanMinutes.Equals(0) && repTime.RepublicanSeconds.Equals(0);
+            var now = Pallettaro.Revo.DateTime.Now;
+
+            var changeDay = now.RepublicanHours.Equals(0) && now.RepublicanMinutes.Equals(0) && now.RepublicanSeconds.Equals(0);
             var dayLabelContainsHour = FormatSettings.ShortFormat.Contains("h") || FormatSettings.ShortFormat.Contains("m") || FormatSettings.ShortFormat.Contains("s");
-            if (changeDay || dayLabelContainsHour) {
-                dateLabel.Text = repTime.ToString(FormatSettings.ShortFormat);
-                dateNameLabel.Text = repTime.DayName;
-                if (repTime.RepublicanDay.Equals(1)) {
-                    this.backgroundImage.Source = $"m{repTime.RepublicanMonth.ToString("00")}.jpg";
-                }
+
+            if (changeDay || dayLabelContainsHour || firstTick) {
+                dateLabel.Text = now.ToString(FormatSettings.ShortFormat);
+                dateNameLabel.Text = now.DayName;
+                backgroundImage.Source = $"m{now.RepublicanMonth.ToString("00")}.jpg";
+
+                firstTick = false;
             }
-            return clockView.OnTimerTick();
+
+            clockView.OnTimerTick(now);
+
+            return true;
         }
     }
 

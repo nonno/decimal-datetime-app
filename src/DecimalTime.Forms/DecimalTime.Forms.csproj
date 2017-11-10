@@ -41,7 +41,7 @@
     <Compile Include="i18n\AppStrings.Designer.cs">
       <DependentUpon>AppStrings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DecimalTimePage.cs" />
+    <Compile Include="Pages\MainPage.cs" />
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
