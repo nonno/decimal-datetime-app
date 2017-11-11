@@ -5,8 +5,8 @@ using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/
-[assembly: Dependency(typeof(DecimalTime.Droid.Utils.Localize))]
-namespace DecimalTime.Droid.Utils
+[assembly: Dependency(typeof(DecimalTime.Droid.Services.Localize))]
+namespace DecimalTime.Droid.Services
 {
     public class Localize : ILocalize
     {
