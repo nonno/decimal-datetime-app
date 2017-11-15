@@ -46,13 +46,13 @@ namespace DecimalTime.Forms.Pages
             };
 
             dateLabel = new Label() {
-                FontSize = 25,
+                FontSize = 24,
                 TextColor = Color.FromHex(Styles.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
             };
             dateNameLabel = new Label {
-                FontSize = 25,
+                FontSize = 24,
                 TextColor = Color.FromHex(Styles.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
