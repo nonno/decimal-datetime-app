@@ -140,8 +140,20 @@ namespace DecimalTime.Forms.Pages
         {
             IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
 
-            var repTime = Pallettaro.Revo.DateTime.Now;
-            DisplayAlert(String.Empty, repTime.ToString(FormatSettings.LongFormat), AppStrings.ok);
+            var now = Pallettaro.Revo.DateTime.Now;
+            var nowString = $"{now.ToString("hh:mm:ss - dd/MM/yyy")} - {now.DayName}, {now.MonthName}";
+
+            DisplayAlert(String.Empty, nowString, AppStrings.ok);
+
+            var nowSpeak = 
+                $"{now.ToString("hh:mm")}; " +
+                $"{now.RepublicanDay}, " +
+                $"{now.RepublicanMonth}, " +
+                $"{now.RepublicanYear}; " +
+                $"{now.DayName}, " +
+                $"{now.MonthName}";
+
+            IoC.TTS.Speak(nowSpeak);
         }
 
         private void OnPageSizeChanged(object sender, EventArgs args)

@@ -36,6 +36,7 @@ namespace DecimalTime.Droid
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(new FirebaseAnalyticsService(this)).As<AnalyticsService>().SingleInstance();
+            builder.RegisterType<TextToSpeechService>().As<ITextToSpeech>().SingleInstance();
             IoC.Container = builder.Build();
         }
 

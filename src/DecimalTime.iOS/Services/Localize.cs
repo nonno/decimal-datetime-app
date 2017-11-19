@@ -6,8 +6,8 @@ using Foundation;
 using Xamarin.Forms;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/
-[assembly: Dependency(typeof(DecimalTime.iOS.Utils.Localize))]
-namespace DecimalTime.iOS.Utils
+[assembly: Dependency(typeof(DecimalTime.iOS.Services.Localize))]
+namespace DecimalTime.iOS.Services
 {
     public class Localize : ILocalize
     {

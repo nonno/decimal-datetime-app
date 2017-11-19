@@ -90,8 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
     <None Include="xamarin_upload_symbols.sh" />
-    <Compile Include="Utils\FirebaseAnalyticsService.cs" />
-    <Compile Include="Utils\Localize.cs" />
+    <Compile Include="Services\*.cs" />
   </ItemGroup>
   <ItemGroup></ItemGroup>
   <ItemGroup>
@@ -129,7 +128,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Utils\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />

@@ -2,7 +2,7 @@
 using Firebase.Analytics;
 using Foundation;
 
-namespace DecimalTime.iOS.Utils
+namespace DecimalTime.iOS.Services
 {
     public class FirebaseAnalyticsService : DecimalTime.Forms.Utils.AnalyticsService
 	{

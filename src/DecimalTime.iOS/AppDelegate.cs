@@ -2,7 +2,7 @@ using System;
 using Autofac;
 using DecimalTime.Forms;
 using DecimalTime.Forms.Utils;
-using DecimalTime.iOS.Utils;
+using DecimalTime.iOS.Services;
 using Foundation;
 using UIKit;
 
@@ -31,6 +31,7 @@ namespace DecimalTime.iOS
         {
             var builder = new ContainerBuilder();
             builder.RegisterType<FirebaseAnalyticsService>().As<AnalyticsService>().SingleInstance();
+            builder.RegisterType<TextToSpeechService>().As<ITextToSpeech>().SingleInstance();
             IoC.Container = builder.Build();
         }
     }
