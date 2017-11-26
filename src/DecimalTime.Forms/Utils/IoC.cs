@@ -1,7 +1,7 @@
 ﻿using System;
 using Autofac;
 
-namespace DecimalTime.Forms.Utils
+namespace DecimalTime.Core.Utils
 {
     public static class IoC
     {

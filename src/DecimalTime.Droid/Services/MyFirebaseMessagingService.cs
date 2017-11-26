@@ -5,7 +5,7 @@ using Android.Graphics;
 using Android.Media;
 using Android.OS;
 using Android.Util;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Core.Utils;
 using Firebase.Messaging;
 using Java.Util.Concurrent.Atomic;
 

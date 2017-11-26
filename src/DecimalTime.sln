@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecimalTime.iOS", "DecimalT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecimalTime.Droid", "DecimalTime.Droid\DecimalTime.Droid.csproj", "{1915C659-A7F4-4DA4-8DD7-11A63B2FC54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecimalTime.Forms", "DecimalTime.Forms\DecimalTime.Forms.csproj", "{051485D5-7B30-4351-96CF-FA8CEDFEBFF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecimalTime.Core", "DecimalTime.Forms\DecimalTime.Core.csproj", "{051485D5-7B30-4351-96CF-FA8CEDFEBFF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

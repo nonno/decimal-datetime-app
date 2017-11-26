@@ -6,7 +6,7 @@ using Firebase.Crash;
 
 namespace DecimalTime.Droid.Services
 {
-    public class FirebaseAnalyticsService : DecimalTime.Forms.Utils.AnalyticsService
+    public class FirebaseAnalyticsService : DecimalTime.Core.Utils.AnalyticsService
 	{
 		private FirebaseAnalytics firebaseAnalytics;
 

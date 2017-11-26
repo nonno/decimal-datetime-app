@@ -5,18 +5,33 @@ using Android.Content.PM;
 using Android.Gms.Common;
 using Android.OS;
 using Android.Util;
+using Autofac;
+using DecimalTime.Droid.Services;
+using DecimalTime.Core.Utils;
+using Firebase;
+using MvvmCross.Forms.Droid.Views;
 using Xamarin.Forms.Platform.Android;
 
 namespace DecimalTime.Droid
 {
     [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
-	public class MainActivity : FormsAppCompatActivity
+    public class MainActivity : MvxFormsAppCompatActivity
     {
         readonly string TAG = nameof(MainActivity);
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        protected override void OnCreate(Bundle bundle)
         {
-            base.OnCreate(savedInstanceState);
+            base.OnCreate(bundle);
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            try {
+                FirebaseApp.InitializeApp(this);
+            } catch (Exception exc) {
+                Console.WriteLine(exc.Message);
+            }
+
+            IoCSetup();
 
             IsPlayServicesAvailable();
 
@@ -26,10 +41,14 @@ namespace DecimalTime.Droid
                     Log.Debug(TAG, "Key: {0} Value: {1}", key, value);
                 }
             }
+        }
 
-            Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
-            LoadApplication(new Forms.App());
+        private void IoCSetup()
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(new FirebaseAnalyticsService(this)).As<AnalyticsService>().SingleInstance();
+            builder.RegisterType<TextToSpeechService>().As<ITextToSpeech>().SingleInstance();
+            IoC.Container = builder.Build();
         }
 
         private bool IsPlayServicesAvailable()
@@ -46,6 +65,13 @@ namespace DecimalTime.Droid
                 Console.WriteLine("Google Play Services is not available.");
             }
             return false;
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine(e);
+
+            IoC.Analytics.LogException(e.ExceptionObject as Exception, true);
         }
     }
 }

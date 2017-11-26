@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace DecimalTime.Forms.Utils
+namespace DecimalTime.Core.Utils
 {
     internal static class FormatSettings
     {

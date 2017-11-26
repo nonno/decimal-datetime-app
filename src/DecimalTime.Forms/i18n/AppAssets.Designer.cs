@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DecimalTime.Forms.i18n {
+namespace DecimalTime.Core.i18n {
     using System;
     using System.Reflection;
     
@@ -30,7 +30,7 @@ namespace DecimalTime.Forms.i18n {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("DecimalTime.Forms.i18n.AppAssets", typeof(AppAssets).GetTypeInfo().Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("DecimalTime.Core.i18n.AppAssets", typeof(AppAssets).GetTypeInfo().Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

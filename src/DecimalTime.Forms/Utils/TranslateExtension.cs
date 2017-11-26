@@ -6,14 +6,14 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/
-namespace DecimalTime.Forms.Utils
+namespace DecimalTime.Core.Utils
 {
     // You exclude the 'Extension' suffix when using in Xaml markup
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
         private readonly CultureInfo ci;
-        private const string resourceId = "DecimalTime.Forms.i18n.AppStrings";
+        private const string resourceId = "DecimalTime.Core.i18n.AppStrings";
 
         private static readonly Lazy<ResourceManager> ResMgr = 
             new Lazy<ResourceManager>(() => new ResourceManager(resourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));

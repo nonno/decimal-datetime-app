@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using AVFoundation;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Core.Utils;
 using UIKit;
 
 namespace DecimalTime.iOS.Services

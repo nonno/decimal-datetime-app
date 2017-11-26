@@ -2,7 +2,7 @@
 using System.Globalization;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/
-namespace DecimalTime.Forms.Utils
+namespace DecimalTime.Core.Utils
 {
     public interface ILocalize
     {

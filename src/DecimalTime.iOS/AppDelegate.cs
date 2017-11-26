@@ -1,16 +1,20 @@
 using System;
 using Autofac;
-using DecimalTime.Forms;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Core.Utils;
 using DecimalTime.iOS.Services;
 using Foundation;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Forms.iOS;
+using MvvmCross.Platform;
 using UIKit;
 
 namespace DecimalTime.iOS
 {
     [Register(nameof(AppDelegate))]
-    public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public partial class AppDelegate : MvxFormsApplicationDelegate
     {
+        public override UIWindow Window { get; set; }
+
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             try {
@@ -21,8 +25,16 @@ namespace DecimalTime.iOS
 
             IoCSetup();
 
-            Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            Window = new UIWindow();
+            var setup = new Setup(this, Window);
+            setup.Initialize();
+
+            var startup = Mvx.Resolve<IMvxAppStart>();
+            startup.Start();
+
+            LoadApplication(setup.FormsApplication);
+
+            Window.MakeKeyAndVisible();
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }

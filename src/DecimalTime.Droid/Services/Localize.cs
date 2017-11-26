@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.Threading;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Core.Utils;
 using Xamarin.Forms;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/

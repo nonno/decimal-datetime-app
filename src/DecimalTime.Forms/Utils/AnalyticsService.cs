@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DecimalTime.Forms.Utils
+namespace DecimalTime.Core.Utils
 {
     public abstract class AnalyticsService
     {

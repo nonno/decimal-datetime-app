@@ -1,6 +1,6 @@
 ﻿using System;
 using Android.Speech.Tts;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Core.Utils;
 using Xamarin.Forms;
 
 namespace DecimalTime.Droid.Services

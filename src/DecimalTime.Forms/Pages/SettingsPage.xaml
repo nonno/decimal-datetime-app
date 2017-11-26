@@ -1,10 +1,14 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<d:MvxContentPage x:TypeArguments="viewModels:SettingsViewModel"
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="DecimalTime.Forms.Pages.SettingsPage"
-    xmlns:i18n="clr-namespace:DecimalTime.Forms.Utils;assembly=DecimalTime.Forms"
+    xmlns:local="clr-namespace:DecimalTime.Core"
+    x:Class="DecimalTime.Core.Pages.SettingsPage"
+    xmlns:viewModels="clr-namespace:DecimalTime.Core.ViewModels;assembly=DecimalTime.Core"
+    xmlns:d="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:i18n="clr-namespace:DecimalTime.Core.Utils;assembly=DecimalTime.Core"
     Title="{i18n:Translate lblSettingsPageTitle}">
-    
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <OnPlatform.iOS>
@@ -22,4 +26,4 @@
 
         <Button Text="{i18n:Translate btnClose}" Clicked="DismissButton_Clicked" />
     </StackLayout>
-</ContentPage>
+</d:MvxContentPage>

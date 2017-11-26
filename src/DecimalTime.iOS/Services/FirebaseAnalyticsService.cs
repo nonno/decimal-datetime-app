@@ -4,7 +4,7 @@ using Foundation;
 
 namespace DecimalTime.iOS.Services
 {
-    public class FirebaseAnalyticsService : DecimalTime.Forms.Utils.AnalyticsService
+    public class FirebaseAnalyticsService : DecimalTime.Core.Utils.AnalyticsService
 	{
         public override void LogPageChange(string pageName)
 		{
