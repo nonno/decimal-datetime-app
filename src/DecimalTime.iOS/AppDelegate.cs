@@ -13,6 +13,8 @@ namespace DecimalTime.iOS
     [Register(nameof(AppDelegate))]
     public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate, IUNUserNotificationCenterDelegate
     {
+        private const string genericNotification = nameof(genericNotification);
+
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
@@ -49,7 +51,7 @@ namespace DecimalTime.iOS
                 // if you want to send notification per user, use this token
                 Console.WriteLine(newToken);
 
-                connectFCM();
+                ConnectFCM();
             });
 
             IoCSetup();
@@ -66,23 +68,18 @@ namespace DecimalTime.iOS
 
         public override void DidEnterBackground(UIApplication uiApplication)
         {
-            Messaging.SharedInstance.Disconnect();
+            Messaging.SharedInstance.ShouldEstablishDirectChannel = false;
         }
 
         public override void OnActivated(UIApplication uiApplication)
         {
-            connectFCM();
+            ConnectFCM();
             base.OnActivated(uiApplication);
         }
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
-#if DEBUG
-            Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Sandbox);
-#endif
-#if RELEASE
-            Firebase.InstanceID.InstanceId.SharedInstance.SetApnsToken(deviceToken, Firebase.InstanceID.ApnsTokenType.Prod);
-#endif
+            Messaging.SharedInstance.ApnsToken = deviceToken;
         }
 
         // iOS 9 <=, fire when recieve notification foreground
@@ -104,17 +101,8 @@ namespace DecimalTime.iOS
                 var alert_d = aps_d["alert"] as NSDictionary;
                 var body = alert_d["body"] as NSString;
                 var title = alert_d["title"] as NSString;
-                debugAlert(title, body);
+                ShowNotification(title, body);
             }
-        }
-
-        // iOS 10, fire when recieve notification foreground
-        [Export("userNotificationCenter:willPresentNotification:withCompletionHandler:")]
-        public void WillPresentNotification(UNUserNotificationCenter center, UNNotification notification, Action<UNNotificationPresentationOptions> completionHandler)
-        {
-            var title = notification.Request.Content.Title;
-            var body = notification.Request.Content.Body;
-            debugAlert(title, body);
         }
 
         // Receive data message on iOS 10 devices.
@@ -123,20 +111,40 @@ namespace DecimalTime.iOS
             Console.WriteLine(remoteMessage.AppData);
         }
 
-        private void connectFCM()
+        private void ConnectFCM()
         {
-            Messaging.SharedInstance.Connect((error) => {
-                if (error == null) {
-                    Messaging.SharedInstance.Subscribe("/topics/all");
-                }
-                Console.WriteLine(error != null ? "error occured" : "connect success");
-            });
+            Messaging.SharedInstance.ShouldEstablishDirectChannel = true;
         }
 
-        private void debugAlert(string title, string message)
+        private void ShowNotification(string title, string message)
         {
-            var alert = new UIAlertView(title ?? "Title", message ?? "Message", null, "Cancel", "OK");
-            alert.Show();
+            //var alert = new UIAlertView(title ?? "Title", message ?? "Message", null, "Cancel", "OK");
+            //alert.Show();
+
+            InvokeOnMainThread(() => {
+                if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0)) {
+                    var content = new UNMutableNotificationContent {
+                        Title = title,
+                        Subtitle = message,
+                        Sound = UNNotificationSound.Default,
+                        Badge = 0
+                    };
+                    NSObject objTrue = new NSNumber(true);
+                    NSString key = new NSString("shouldAlwaysAlertWhileAppIsForeground");
+                    content.SetValueForKey(objTrue, key);
+                    key = new NSString("shouldAddToNotificationsList");
+                    content.SetValueForKey(objTrue, key);
+
+                    var trigger = UNTimeIntervalNotificationTrigger.CreateTrigger(2, false);
+                    var request = UNNotificationRequest.FromIdentifier(genericNotification, content, trigger);
+
+                    UNUserNotificationCenter.Current.AddNotificationRequest(request, (err) => {
+                        if (err != null) {
+                            Console.WriteLine("Error: " + err.LocalizedDescription);
+                        }
+                    });
+                }
+            });
         }
     }
 }
