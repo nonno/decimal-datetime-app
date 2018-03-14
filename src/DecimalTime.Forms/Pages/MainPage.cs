@@ -1,4 +1,5 @@
 ﻿using System;
+using DecimalTime.Forms.Converters;
 using DecimalTime.Forms.i18n;
 using DecimalTime.Forms.Utils;
 using DecimalTime.Forms.Views;
@@ -6,10 +7,8 @@ using Xamarin.Forms;
 
 namespace DecimalTime.Forms.Pages
 {
-    class MainPage : ContentPage
+    public class MainPage : ContentPage
     {
-        private readonly int timerPeriod = Convert.ToInt32(Pallettaro.Revo.DateTime.SECONDS_RATIO * 500);
-
         private AbsoluteLayout contentContainer;
 
         private Label dateLabel;
@@ -19,20 +18,22 @@ namespace DecimalTime.Forms.Pages
         private Image backgroundImage;
         private Button settingsButton;
 
-        private bool firstTick = true;
-
         private readonly TapGestureRecognizer pageDoubleTapRecognizer;
 
         public MainPage()
         {
+            var pageModel = new MainPageModel(Navigation);
+            BindingContext = pageModel;
+            pageModel.Initialize();
+
             SetupControls();
+
+            SetupBindings();
 
             pageDoubleTapRecognizer = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
             pageDoubleTapRecognizer.Tapped += Page_DoubleTapped;
 
             SizeChanged += OnPageSizeChanged;
-
-            Device.StartTimer(TimeSpan.FromMilliseconds(timerPeriod), OnTimerTick);
         }
 
         private void SetupControls()
@@ -63,7 +64,6 @@ namespace DecimalTime.Forms.Pages
                 BorderColor = Color.Transparent,
                 Image = AppAssets.settingsIco
             };
-            settingsButton.Clicked += SettingsButton_Clicked;
 
             contentContainer.Children.Add(backgroundImage);
             contentContainer.Children.Add(clockView);
@@ -75,11 +75,21 @@ namespace DecimalTime.Forms.Pages
                 dateNameLabel.IsVisible = false;
                 dateLabel.IsVisible = false;
             }
-            if (true) { // TODO settings temporary disabled (not ready for production)
+            if (true) { // TODO settings temporary disabled (not ready for production), to use remote config
                 settingsButton.IsVisible = false;
             }
 
             this.Content = contentContainer;
+        }
+
+        private void SetupBindings()
+        {
+            clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.TwoWay);
+            backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
+            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter());
+            dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToDayNameConverter());
+
+            settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
         }
 
         private void SetupControlsPositions()
@@ -113,8 +123,6 @@ namespace DecimalTime.Forms.Pages
         {
             base.OnAppearing();
 
-            OnTimerTick();
-
             this.contentContainer.GestureRecognizers.Add(pageDoubleTapRecognizer);
         }
         protected override void OnDisappearing()
@@ -124,36 +132,12 @@ namespace DecimalTime.Forms.Pages
             this.contentContainer.GestureRecognizers.Remove(pageDoubleTapRecognizer);
         }
 
-        private async void SettingsButton_Clicked(object sender, EventArgs e)
-        {
-            IoC.Analytics.LogEvent(AnalyticsService.Action.OpenSettings);
-
-            Action refresh = () => {
-                dateLabel.Text = Pallettaro.Revo.DateTime.Now.ToString(FormatSettings.ShortFormat);
-            };
-            var settingsPage = new SettingsPage(refresh);
-            await Navigation.PushModalAsync(settingsPage);
-
-        }
-
         private void Page_DoubleTapped(object sender, EventArgs e)
         {
-            IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
+            var pageModel = (BindingContext as MainPageModel);
 
-            var now = Pallettaro.Revo.DateTime.Now;
-            var nowString = $"{now.ToString("hh:mm:ss - dd/MM/yyy")} - {now.DayName}, {now.MonthName}";
-
-            DisplayAlert(String.Empty, nowString, AppStrings.ok);
-
-            var nowSpeak = 
-                $"{now.ToString("hh:mm")}; " +
-                $"{now.RepublicanDay}, " +
-                $"{now.RepublicanMonth}, " +
-                $"{now.RepublicanYear}; " +
-                $"{now.DayName}, " +
-                $"{now.MonthName}";
-
-            IoC.TTS.Speak(nowSpeak);
+            pageModel?.AlertCurrentDateTimeCommand?.Execute(this);
+            pageModel?.SpeakCommand?.Execute(this);
         }
 
         private void OnPageSizeChanged(object sender, EventArgs args)
@@ -162,26 +146,5 @@ namespace DecimalTime.Forms.Pages
 
             this.clockView.OnPageSizeChanged(sender, args);
         }
-
-        private bool OnTimerTick()
-        {
-            var now = Pallettaro.Revo.DateTime.Now;
-
-            var changeDay = now.RepublicanHours.Equals(0) && now.RepublicanMinutes.Equals(0) && now.RepublicanSeconds.Equals(0);
-            var dayLabelContainsHour = FormatSettings.ShortFormat.Contains("h") || FormatSettings.ShortFormat.Contains("m") || FormatSettings.ShortFormat.Contains("s");
-
-            if (changeDay || dayLabelContainsHour || firstTick) {
-                dateLabel.Text = now.ToString(FormatSettings.ShortFormat);
-                dateNameLabel.Text = now.DayName;
-                backgroundImage.Source = $"m{now.RepublicanMonth.ToString("00")}.jpg";
-
-                firstTick = false;
-            }
-
-            clockView.OnTimerTick(now);
-
-            return true;
-        }
     }
-
 }

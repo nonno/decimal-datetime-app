@@ -80,7 +80,14 @@ namespace DecimalTime.iOS
 
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
+            Console.WriteLine("Token: " + deviceToken);
             Messaging.SharedInstance.ApnsToken = deviceToken;
+        }
+
+        [Export("messaging:didReceiveRegistrationToken:")]
+        public void DidReceiveRegistrationToken(Messaging messaging, string fcmToken)
+        {
+            Console.WriteLine($"Firebase registration token: {fcmToken}");
         }
 
         // iOS 9 <=, fire when recieve notification foreground
@@ -90,7 +97,7 @@ namespace DecimalTime.iOS
 
             // Generate custom event
             NSString[] keys = { new NSString("Event_type") };
-            NSObject[] values = { new NSString("Recieve_Notification") };
+            NSObject[] values = { new NSString("Receive_Notification") };
             var parameters = NSDictionary<NSString, NSObject>.FromObjectsAndKeys(keys, values, keys.Length);
 
             // Send custom event
@@ -98,11 +105,19 @@ namespace DecimalTime.iOS
 
             if (application.ApplicationState == UIApplicationState.Active) {
                 Console.WriteLine(userInfo);
-                var aps_d = userInfo["aps"] as NSDictionary;
-                var alert_d = aps_d["alert"] as NSDictionary;
-                var body = alert_d["body"] as NSString;
-                var title = alert_d["title"] as NSString;
-                ShowNotification(title, body);
+                try
+                {
+                    var aps = userInfo["aps"] as NSDictionary;
+                    var alert = aps["alert"] as NSDictionary;
+                    if (alert != null) {
+                        var title = alert["title"] as NSString ?? new NSString();
+                        var body = alert["body"] as NSString ?? new NSString();
+
+                        ShowNotification(title, body);
+                    }
+                } catch(Exception ex) {
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 

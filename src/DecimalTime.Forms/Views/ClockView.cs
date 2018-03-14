@@ -6,6 +6,13 @@ namespace DecimalTime.Forms.Views
 {
     public class ClockView : AbsoluteLayout
     {
+        public static readonly BindableProperty DecimalDateTimeProperty = BindableProperty.Create(nameof(DecimalDateTime), typeof(Pallettaro.Revo.DateTime), typeof(ClockView), propertyChanged: DecimalDateTimePropertyChanged);
+        public Pallettaro.Revo.DateTime DecimalDateTime
+        {
+            get => (Pallettaro.Revo.DateTime)GetValue(DecimalDateTimeProperty);
+            set => SetValue(DecimalDateTimeProperty, value);
+        }
+
         private BoxView secondHand;
         private BoxView minuteHand;
         private BoxView hourHand;
@@ -41,8 +48,14 @@ namespace DecimalTime.Forms.Views
             SetupHands(center, radius);
         }
 
-        public void OnTimerTick(Pallettaro.Revo.DateTime dateTime)
+        private static void DecimalDateTimePropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
+            (bindable as ClockView).OnTimerTick();
+        }
+        public void OnTimerTick()
+        {
+            var dateTime = DecimalDateTime;
+
             hourHand.Rotation = 36 * dateTime.RepublicanHours + 0.36 * dateTime.RepublicanMinutes;
             minuteHand.Rotation = 3.6 * dateTime.RepublicanMinutes + 0.036 * dateTime.RepublicanSeconds;
             secondHand.Rotation = 3.6 * (dateTime.RepublicanSeconds);

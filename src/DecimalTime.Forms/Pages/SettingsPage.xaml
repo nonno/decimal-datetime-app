@@ -15,11 +15,11 @@
     
     <StackLayout Spacing="10">
         <Label Text="{i18n:Translate lblDateFormatShort}"/>
-        <Entry x:Name="Short" TextChanged="Short_Changed" MeasureInvalidated="Short_Added" />
+        <Entry Text="{Binding ShortFormatText}" />
             
         <Label Text="{i18n:Translate lblDateFormatLong}"/>
-        <Editor x:Name="Long" TextChanged="Long_Changed" MeasureInvalidated="Long_Added" HeightRequest="80" />
+        <Editor Text="{Binding LongFormatText}" HeightRequest="80" />
 
-        <Button Text="{i18n:Translate btnClose}" Clicked="DismissButton_Clicked" />
+        <Button Text="{i18n:Translate btnClose}" Command="{Binding CloseCommand}" />
     </StackLayout>
 </ContentPage>
