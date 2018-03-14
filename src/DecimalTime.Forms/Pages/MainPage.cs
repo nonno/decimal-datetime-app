@@ -1,4 +1,5 @@
 ﻿using System;
+using DecimalTime.Forms.Controls;
 using DecimalTime.Forms.Converters;
 using DecimalTime.Forms.i18n;
 using DecimalTime.Forms.Utils;
@@ -59,7 +60,7 @@ namespace DecimalTime.Forms.Pages
                 HorizontalTextAlignment = TextAlignment.Center
             };
 
-            settingsButton = new Button {
+            settingsButton = new SettingsButton {
                 BackgroundColor = Color.Transparent,
                 BorderColor = Color.Transparent,
                 Image = AppAssets.settingsIco
@@ -74,9 +75,6 @@ namespace DecimalTime.Forms.Pages
             if (this.IsSquare()) {
                 dateNameLabel.IsVisible = false;
                 dateLabel.IsVisible = false;
-            }
-            if (true) { // TODO settings temporary disabled (not ready for production), to use remote config
-                settingsButton.IsVisible = false;
             }
 
             this.Content = contentContainer;

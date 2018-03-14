@@ -1,5 +1,6 @@
 ﻿using System;
 using DecimalTime.Forms.Pages;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
@@ -16,6 +17,23 @@ namespace DecimalTime.Forms
             }
 
             MainPage = new MainPage();
+        }
+
+        protected override void OnStart()
+        {
+            Resources = CreateGlobalStyles(new StyleProvider());
+        }
+
+        protected ResourceDictionary CreateGlobalStyles(StyleProvider styleProvider)
+        {
+            var resources = new ResourceDictionary {
+                styleProvider.GetStyleForButtons(),
+                styleProvider.GetStyleForLabels(),
+                styleProvider.GetStyleForEntries(),
+                styleProvider.GetStyleForEditors(),
+                styleProvider.GetStyleForPages()
+            };
+            return resources;
         }
     }
 }

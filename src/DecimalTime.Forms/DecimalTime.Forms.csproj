@@ -33,6 +33,8 @@
     <Folder Include="Utils\" />
     <Folder Include="i18n\" />
     <Folder Include="Converters\" />
+    <Folder Include="Services\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,6 +55,8 @@
     <Compile Include="Converters\DecimalDateTimeToDayNameConverter.cs" />
     <Compile Include="Converters\DecimalDateTimeToShortFormatConverter.cs" />
     <Compile Include="Pages\SettingsPageModel.cs" />
+    <Compile Include="Services\StyleProvider.cs" />
+    <Compile Include="Controls\SettingsButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
