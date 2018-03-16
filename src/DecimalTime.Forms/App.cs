@@ -16,7 +16,7 @@ namespace DecimalTime.Forms
                 IoC.Localization.SetLocale(ci); // set the Thread for locale-aware methods
             }
 
-            MainPage = new MainPage();
+            MainPage = new MainPage(IoC.Settings);
         }
 
         protected override void OnStart()

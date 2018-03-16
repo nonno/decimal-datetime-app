@@ -2,6 +2,7 @@
 using DecimalTime.Forms.Controls;
 using DecimalTime.Forms.Converters;
 using DecimalTime.Forms.i18n;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using DecimalTime.Forms.Views;
 using Xamarin.Forms;
@@ -10,6 +11,8 @@ namespace DecimalTime.Forms.Pages
 {
     public class MainPage : ContentPage
     {
+        private SettingsProvider _settingsProvider;
+
         private AbsoluteLayout contentContainer;
 
         private Label dateLabel;
@@ -21,9 +24,11 @@ namespace DecimalTime.Forms.Pages
 
         private readonly TapGestureRecognizer pageDoubleTapRecognizer;
 
-        public MainPage()
+        public MainPage(SettingsProvider settingsProvider)
         {
-            var pageModel = new MainPageModel(Navigation, IoC.Analytics, IoC.TTS);
+            _settingsProvider = settingsProvider;
+
+            var pageModel = new MainPageModel(Navigation, IoC.Analytics, IoC.Settings, IoC.TTS);
             BindingContext = pageModel;
             pageModel.Initialize();
 
@@ -41,21 +46,21 @@ namespace DecimalTime.Forms.Pages
         {
             contentContainer = new AbsoluteLayout();
 
-            clockView = new ClockView();
+            clockView = new ClockView(_settingsProvider);
 
             backgroundImage = new Image {
                 Aspect = Aspect.AspectFill
             };
 
-            dateLabel = new Label() {
+            dateLabel = new Label {
                 FontSize = 24,
-                TextColor = Color.FromHex(Styles.DateLabelColor),
+                TextColor = Color.FromHex(_settingsProvider.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
             };
             dateNameLabel = new Label {
                 FontSize = 24,
-                TextColor = Color.FromHex(Styles.DateLabelColor),
+                TextColor = Color.FromHex(_settingsProvider.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
             };
@@ -82,8 +87,10 @@ namespace DecimalTime.Forms.Pages
 
         private void SetupBindings()
         {
-            clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.TwoWay);
+            this.SetBinding(MainPage.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
+
             backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
+            clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.TwoWay);
             dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter(IoC.Settings));
             dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToDayNameConverter());
 

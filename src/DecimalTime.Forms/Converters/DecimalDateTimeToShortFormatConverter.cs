@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using DecimalTime.Forms.Utils;
+using DecimalTime.Forms.Services;
 using Xamarin.Forms;
 
 namespace DecimalTime.Forms.Converters

@@ -3,6 +3,7 @@ using Android.App;
 using Android.Runtime;
 using Autofac;
 using DecimalTime.Droid.Services;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Firebase;
 

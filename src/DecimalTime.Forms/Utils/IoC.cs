@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using DecimalTime.Forms.Services;
 
 namespace DecimalTime.Forms.Utils
 {

@@ -49,14 +49,13 @@
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\*.cs" />
+    <Compile Include="Converters\*.cs" />
+    <Compile Include="Services\*.cs" />
     <Compile Include="Utils\*.cs" />
     <Compile Include="Views\*.cs" />
     <Compile Include="Pages\MainPageModel.cs" />
-    <Compile Include="Converters\DecimalDateTimeToDayNameConverter.cs" />
-    <Compile Include="Converters\DecimalDateTimeToShortFormatConverter.cs" />
     <Compile Include="Pages\SettingsPageModel.cs" />
-    <Compile Include="Services\StyleProvider.cs" />
-    <Compile Include="Controls\SettingsButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation">

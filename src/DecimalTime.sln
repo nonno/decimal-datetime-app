@@ -213,6 +213,21 @@ Global
 		$6.String = T
 		$5.RequiredSuffixes = $7
 		$7.String = Exception
+		$0.TextStylePolicy = $8
+		$8.inheritsSet = null
+		$8.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $9
+		$9.NewLinesForBracesInProperties = False
+		$9.NewLinesForBracesInAccessors = False
+		$9.NewLinesForBracesInAnonymousMethods = False
+		$9.NewLinesForBracesInControlBlocks = False
+		$9.NewLinesForBracesInAnonymousTypes = False
+		$9.NewLinesForBracesInObjectCollectionArrayInitializers = False
+		$9.NewLinesForBracesInLambdaExpressionBody = False
+		$9.NewLineForElse = False
+		$9.NewLineForCatch = False
+		$9.NewLineForFinally = False
+		$9.scope = text/x-csharp
 		version = 
 	EndGlobalSection
 EndGlobal

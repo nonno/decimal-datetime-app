@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Input;
 using DecimalTime.Forms.i18n;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
@@ -11,16 +12,19 @@ namespace DecimalTime.Forms.Pages
     {
         private INavigation _navigation;
         private AnalyticsService _analyticsService;
+        private SettingsProvider _settingsProvider;
         private ITextToSpeechService _ttsService;
 
         public MainPageModel(
             INavigation navigation,
             AnalyticsService analyticsService,
+            SettingsProvider settingsProvider,
             ITextToSpeechService ttsService
         ) {
             _navigation = navigation;
             _analyticsService = analyticsService;
             _ttsService = ttsService;
+            _settingsProvider = settingsProvider;
         }
 
         public void Initialize()
@@ -63,6 +67,10 @@ namespace DecimalTime.Forms.Pages
                 _calendarImageFile = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalendarImageFile)));
             }
+        }
+
+        public string BackgroundColor {
+            get => _settingsProvider.BackgroundColor;
         }
 
         public ICommand SpeakCommand => new Command(Speak);

@@ -1,4 +1,5 @@
 ﻿using System;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
@@ -19,6 +20,13 @@ namespace DecimalTime.Forms.Views
 
         private BoxView[] tickMarks = new BoxView[100];
 
+        private SettingsProvider _settingsProvider;
+
+        public ClockView(SettingsProvider settingsProvider)
+        {
+            _settingsProvider = settingsProvider;
+        }
+
         protected override void OnParentSet()
         {
             CreateElements();
@@ -28,15 +36,15 @@ namespace DecimalTime.Forms.Views
 
         private void CreateElements()
         {
-            var tickMarksColor = Color.FromHex(Styles.TickMarksColor);
+            var tickMarksColor = Color.FromHex(_settingsProvider.TickMarksColor);
             for (int i = 0; i < tickMarks.Length; i++) {
                 tickMarks[i] = new BoxView { Color = tickMarksColor };
                 this.Children.Add(tickMarks[i]);
             }
 
-            this.Children.Add(hourHand = new BoxView { Color = Color.FromHex(Styles.HoursHandColor) });
-            this.Children.Add(minuteHand = new BoxView { Color = Color.FromHex(Styles.MinutesHandColor) });
-            this.Children.Add(secondHand = new BoxView { Color = Color.FromHex(Styles.SecondsHandColor) });
+            this.Children.Add(hourHand = new BoxView { Color = Color.FromHex(_settingsProvider.HoursHandColor) });
+            this.Children.Add(minuteHand = new BoxView { Color = Color.FromHex(_settingsProvider.MinutesHandColor) });
+            this.Children.Add(secondHand = new BoxView { Color = Color.FromHex(_settingsProvider.SecondsHandColor) });
         }
 
         public void OnPageSizeChanged(object sender, EventArgs args)
