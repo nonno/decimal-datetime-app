@@ -10,12 +10,18 @@ namespace DecimalTime.Forms.Pages
     {
         private INavigation _navigation;
 
-        public SettingsPageModel(INavigation navigation)
+        private SettingsProvider _settingsProvider;
+
+        public SettingsPageModel(INavigation navigation, SettingsProvider settingsProvider)
         {
             _navigation = navigation;
+            _settingsProvider = settingsProvider;
+
+            _shortFormatText = _settingsProvider.ShortFormat;
+            _longFormatText = _settingsProvider.LongFormat;
         }
 
-        private string _shortFormatText = FormatSettings.ShortFormat;
+        private string _shortFormatText;
         public string ShortFormatText
         {
             get => _shortFormatText;
@@ -24,12 +30,12 @@ namespace DecimalTime.Forms.Pages
                 if (_shortFormatText == value) return;
 
                 _shortFormatText = value;
-                FormatSettings.ShortFormat = value;
+                _settingsProvider.ShortFormat = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ShortFormatText)));
             }
         }
 
-        private string _longFormatText = FormatSettings.LongFormat;
+        private string _longFormatText;
         public string LongFormatText
         {
             get => _longFormatText;
@@ -38,7 +44,7 @@ namespace DecimalTime.Forms.Pages
                 if (_longFormatText == value) return;
 
                 _longFormatText = value;
-                FormatSettings.LongFormat = value;
+                _settingsProvider.LongFormat = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LongFormatText)));
             }
         }

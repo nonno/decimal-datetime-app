@@ -23,7 +23,7 @@ namespace DecimalTime.Forms.Pages
 
         public MainPage()
         {
-            var pageModel = new MainPageModel(Navigation);
+            var pageModel = new MainPageModel(Navigation, IoC.Analytics, IoC.TTS);
             BindingContext = pageModel;
             pageModel.Initialize();
 
@@ -84,7 +84,7 @@ namespace DecimalTime.Forms.Pages
         {
             clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.TwoWay);
             backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
-            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter());
+            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter(IoC.Settings));
             dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToDayNameConverter());
 
             settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));

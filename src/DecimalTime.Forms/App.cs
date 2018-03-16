@@ -11,9 +11,9 @@ namespace DecimalTime.Forms
         public App()
         {
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android) {
-                var ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                var ci = IoC.Localization.GetCurrentCultureInfo();
                 i18n.AppStrings.Culture = ci; // set the RESX for resource localization
-                DependencyService.Get<ILocalize>().SetLocale(ci); // set the Thread for locale-aware methods
+                IoC.Localization.SetLocale(ci); // set the Thread for locale-aware methods
             }
 
             MainPage = new MainPage();

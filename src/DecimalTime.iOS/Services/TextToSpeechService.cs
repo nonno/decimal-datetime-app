@@ -6,7 +6,7 @@ using UIKit;
 
 namespace DecimalTime.iOS.Services
 {
-    public class TextToSpeechService : ITextToSpeech
+    public class TextToSpeechService : ITextToSpeechService
     {
         public void Speak(string text)
         {

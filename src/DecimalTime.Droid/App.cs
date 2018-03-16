@@ -23,21 +23,28 @@ namespace DecimalTime.Droid
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+            IoCSetup();
+
+            FirebaseSetup();
+        }
+
+        private void IoCSetup()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterInstance(new FirebaseAnalyticsService(this)).As<AnalyticsService>().SingleInstance();
+            containerBuilder.RegisterType<TextToSpeechService>().As<ITextToSpeechService>().SingleInstance();
+            containerBuilder.RegisterType<LocalizationService>().As<ILocalizationService>().SingleInstance();
+            containerBuilder.RegisterType<SettingsProvider>().As<SettingsProvider>().SingleInstance();
+            IoC.Container = containerBuilder.Build();
+        }
+
+        private void FirebaseSetup()
+        {
             try {
                 FirebaseApp.InitializeApp(this);
             } catch (Exception exc) {
                 Console.WriteLine(exc.Message);
             }
-
-            IoCSetup();
-        }
-
-        private void IoCSetup()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterInstance(new FirebaseAnalyticsService(this)).As<AnalyticsService>().SingleInstance();
-            builder.RegisterType<TextToSpeechService>().As<ITextToSpeech>().SingleInstance();
-            IoC.Container = builder.Build();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

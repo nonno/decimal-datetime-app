@@ -5,16 +5,16 @@ using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
 // https://developer.xamarin.com/guides/xamarin-forms/advanced/localization/
-[assembly: Dependency(typeof(DecimalTime.Droid.Services.Localize))]
 namespace DecimalTime.Droid.Services
 {
-    public class Localize : ILocalize
+    public class LocalizationService : ILocalizationService
     {
         public void SetLocale(CultureInfo ci)
         {
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
         }
+
         public CultureInfo GetCurrentCultureInfo()
         {
             var netLanguage = "en";
@@ -39,6 +39,7 @@ namespace DecimalTime.Droid.Services
             }
             return ci;
         }
+
         string AndroidToDotnetLanguage(string androidLanguage)
         {
             var netLanguage = androidLanguage;
@@ -60,6 +61,7 @@ namespace DecimalTime.Droid.Services
             }
             return netLanguage;
         }
+
         string ToDotnetFallbackLanguage(PlatformCulture platCulture)
         {
             var netLanguage = platCulture.LanguageCode; // use the first part of the identifier (two chars, usually);

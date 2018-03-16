@@ -2,7 +2,7 @@
 
 namespace DecimalTime.Forms.Utils
 {
-    public interface ITextToSpeech
+    public interface ITextToSpeechService
     {
         void Speak(string text);
     }

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace DecimalTime.Droid.Services
 {
-    public class TextToSpeechService : Java.Lang.Object, ITextToSpeech, TextToSpeech.IOnInitListener
+    public class TextToSpeechService : Java.Lang.Object, ITextToSpeechService, TextToSpeech.IOnInitListener
     {
         TextToSpeech speaker;
         string toSpeak;

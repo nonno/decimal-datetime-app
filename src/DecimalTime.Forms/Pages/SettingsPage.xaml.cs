@@ -9,7 +9,7 @@ namespace DecimalTime.Forms.Pages
     {
         public SettingsPage()
         {
-            var pageModel = new SettingsPageModel(Navigation);
+            var pageModel = new SettingsPageModel(Navigation, IoC.Settings);
             BindingContext = pageModel;
 
             InitializeComponent();

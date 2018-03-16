@@ -10,10 +10,17 @@ namespace DecimalTime.Forms.Pages
     public class MainPageModel : INotifyPropertyChanged
     {
         private INavigation _navigation;
+        private AnalyticsService _analyticsService;
+        private ITextToSpeechService _ttsService;
 
-        public MainPageModel(INavigation navigation)
-        {
+        public MainPageModel(
+            INavigation navigation,
+            AnalyticsService analyticsService,
+            ITextToSpeechService ttsService
+        ) {
             _navigation = navigation;
+            _analyticsService = analyticsService;
+            _ttsService = ttsService;
         }
 
         public void Initialize()
@@ -70,13 +77,13 @@ namespace DecimalTime.Forms.Pages
                 $"{now.DayName}, " +
                 $"{now.MonthName}";
 
-            IoC.TTS.Speak(nowSpeak);
+            _ttsService.Speak(nowSpeak);
         }
 
         public ICommand AlertCurrentDateTimeCommand => new Command(AlertCurrentDateTime);
         private void AlertCurrentDateTime()
         {
-            IoC.Analytics.LogEvent(AnalyticsService.Action.ShowExtendedDate);
+            _analyticsService.LogEvent(AnalyticsService.Action.ShowExtendedDate);
 
             var now = Pallettaro.Revo.DateTime.Now;
             var nowString = $"{now.ToString("hh:mm:ss - dd/MM/yyy")} - {now.DayName}, {now.MonthName}";
@@ -87,7 +94,7 @@ namespace DecimalTime.Forms.Pages
         public ICommand ShowSettingsCommand => new Command(ShowSettings);
         private void ShowSettings()
         {
-            IoC.Analytics.LogEvent(AnalyticsService.Action.OpenSettings);
+            _analyticsService.LogEvent(AnalyticsService.Action.OpenSettings);
 
             _navigation.PushModalAsync(new SettingsPage());
         }

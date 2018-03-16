@@ -21,7 +21,7 @@ namespace DecimalTime.Forms.Utils
         public TranslateExtension()
         {
             if (Device.RuntimePlatform == Device.iOS || Device.RuntimePlatform == Device.Android) {
-                ci = DependencyService.Get<ILocalize>().GetCurrentCultureInfo();
+                ci = IoC.Localization.GetCurrentCultureInfo();
             }
         }
 

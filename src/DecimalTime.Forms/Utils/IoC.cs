@@ -11,8 +11,16 @@ namespace DecimalTime.Forms.Utils
             get { return ResolveObject<AnalyticsService>(); }
         }
 
-        public static ITextToSpeech TTS {
-            get { return ResolveObject<ITextToSpeech>(); }
+        public static ILocalizationService Localization {
+            get { return ResolveObject<ILocalizationService>(); }
+        }
+
+        public static SettingsProvider Settings {
+            get { return ResolveObject<SettingsProvider>(); }
+        }
+
+        public static ITextToSpeechService TTS {
+            get { return ResolveObject<ITextToSpeechService>(); }
         }
 
         private static T ResolveObject<T>()

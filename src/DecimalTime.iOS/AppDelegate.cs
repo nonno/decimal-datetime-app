@@ -17,13 +17,33 @@ namespace DecimalTime.iOS
 
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            IoCSetup();
+
+            FirebaseSetup();
+
+            Xamarin.Forms.Forms.Init();
 
             LoadApplication(new App());
 
+            return base.FinishedLaunching(app, options);
+        }
+
+        private void IoCSetup()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<FirebaseAnalyticsService>().As<AnalyticsService>().SingleInstance();
+            containerBuilder.RegisterType<TextToSpeechService>().As<ITextToSpeechService>().SingleInstance();
+            containerBuilder.RegisterType<LocalizationService>().As<ILocalizationService>().SingleInstance();
+            containerBuilder.RegisterType<SettingsProvider>().As<SettingsProvider>().SingleInstance();
+            IoC.Container = containerBuilder.Build();
+        }
+
+        private void FirebaseSetup()
+        {
+            Firebase.Core.App.Configure();
+
             // get permission for notification
             if (UIDevice.CurrentDevice.CheckSystemVersion(10, 0)) {
-                // iOS 10
                 var authOptions = UNAuthorizationOptions.Alert | UNAuthorizationOptions.Badge | UNAuthorizationOptions.Sound;
                 UNUserNotificationCenter.Current.RequestAuthorization(authOptions, (granted, error) => {
                     Console.WriteLine(granted);
@@ -35,16 +55,12 @@ namespace DecimalTime.iOS
                 // For iOS 10 data message (sent via FCM)
                 //Messaging.SharedInstance.RemoteMessageDelegate = this;
             } else {
-                // iOS 9 <=
                 var allNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound;
                 var settings = UIUserNotificationSettings.GetSettingsForTypes(allNotificationTypes, null);
                 UIApplication.SharedApplication.RegisterUserNotificationSettings(settings);
             }
 
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
-
-            // Firebase component initialize
-            Firebase.Core.App.Configure();
 
             Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) => {
                 var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
@@ -53,18 +69,6 @@ namespace DecimalTime.iOS
 
                 ConnectFCM();
             });
-
-            IoCSetup();
-
-            return base.FinishedLaunching(app, options);
-        }
-
-        private void IoCSetup()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterType<FirebaseAnalyticsService>().As<AnalyticsService>().SingleInstance();
-            builder.RegisterType<TextToSpeechService>().As<ITextToSpeech>().SingleInstance();
-            IoC.Container = builder.Build();
         }
 
         public override void DidEnterBackground(UIApplication uiApplication)
