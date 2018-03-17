@@ -7,14 +7,38 @@
     <data name="btnClose" xml:space="preserve">
         <value>Close</value>
     </data>
+    <data name="lblBackgroundColor" xml:space="preserve">
+        <value>Background color</value>
+    </data>
     <data name="lblDateFormatLong" xml:space="preserve">
         <value>Long format</value>
     </data>
     <data name="lblDateFormatShort" xml:space="preserve">
         <value>Short format</value>
     </data>
+    <data name="lblDateLabelColor" xml:space="preserve">
+        <value>Date label color</value>
+    </data>
+    <data name="lblEnableReaderOnDoubleTap" xml:space="preserve">
+        <value>Reader on double tap</value>
+    </data>
+    <data name="lblHoursHandColor" xml:space="preserve">
+        <value>Hours hand color</value>
+    </data>
+    <data name="lblMinutesHandColor" xml:space="preserve">
+        <value>Minutes hand color</value>
+    </data>
+    <data name="lblSecondsHandColor" xml:space="preserve">
+        <value>Seconds hand color</value>
+    </data>
     <data name="lblSettingsPageTitle" xml:space="preserve">
         <value>Settings</value>
+    </data>
+    <data name="lblShowBackgroundImage" xml:space="preserve">
+        <value>Show background image</value>
+    </data>
+    <data name="lblTickMarksColor" xml:space="preserve">
+        <value>Tick marks color</value>
     </data>
 	
 	<resheader name="resmimetype">

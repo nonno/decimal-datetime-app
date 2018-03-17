@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="DecimalTime.Forms.Pages.SettingsPage"
+    xmlns:local="clr-namespace:DecimalTime.Forms.Services;assembly=DecimalTime.Forms"
     xmlns:i18n="clr-namespace:DecimalTime.Forms.Utils;assembly=DecimalTime.Forms"
     Title="{i18n:Translate lblSettingsPageTitle}">
     
@@ -13,13 +14,55 @@
         </OnPlatform>
     </ContentPage.Padding>
     
-    <StackLayout Spacing="10">
-        <Label Text="{i18n:Translate lblDateFormatShort}"/>
-        <Entry Text="{Binding ShortFormatText}" />
-            
-        <Label Text="{i18n:Translate lblDateFormatLong}"/>
-        <Editor Text="{Binding LongFormatText}" HeightRequest="80" />
+    <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" Spacing="10">
+        <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
+            <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
+                <Label Text="{i18n:Translate lblBackgroundColor}"/>
+                <Entry Text="{Binding BackgroundColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                <Label Text="{i18n:Translate lblShowBackgroundImage}"/>
+                <Switch IsToggled="{Binding ShowBackgroundImage}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Switch>
 
+                <Label Text="{i18n:Translate lblDateLabelColor}"/>
+                <Entry Text="{Binding DateLabelColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                
+                <Label Text="{i18n:Translate lblHoursHandColor}"/>
+                <Entry Text="{Binding HoursHandColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                <Label Text="{i18n:Translate lblMinutesHandColor}"/>
+                <Entry Text="{Binding MinutesHandColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                <Label Text="{i18n:Translate lblSecondsHandColor}"/>
+                <Entry Text="{Binding SecondsHandColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                <Label Text="{i18n:Translate lblTickMarksColor}"/>
+                <Entry Text="{Binding TickMarksColor}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+
+                <Label Text="{i18n:Translate lblEnableReaderOnDoubleTap}"/>
+                <Switch IsToggled="{Binding EnableReaderOnDoubleTap}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Switch>
+                
+                <Label Text="{i18n:Translate lblDateFormatShort}"/>
+                <Entry Text="{Binding ShortFormat}">
+                    <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
+                </Entry>
+                <Label Text="{i18n:Translate lblDateFormatLong}"/>
+                <Editor Text="{Binding LongFormat}" HeightRequest="80">
+                    <Editor.BindingContext><local:SettingsProvider /></Editor.BindingContext>
+                </Editor>
+            </StackLayout>
+        </ScrollView>
         <Button Text="{i18n:Translate btnClose}" Command="{Binding CloseCommand}" />
     </StackLayout>
 </ContentPage>

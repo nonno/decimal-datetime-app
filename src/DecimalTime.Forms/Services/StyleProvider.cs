@@ -38,7 +38,7 @@ namespace DecimalTime.Forms.Services
                 TextColor = Color.FromRgb(55, 55, 55),
                 TextSize = 18.0,
                 TextAlignment = TextAlignment.Start,
-                Margin = new Thickness(5, 0, 5, 0)
+                Margin = new Thickness(5, 5, 5, 5)
             };
 		}
 
@@ -121,6 +121,15 @@ namespace DecimalTime.Forms.Services
                     new Setter { Property = Xamarin.Forms.Editor.BackgroundColorProperty, Value = Editor.BackgroundColor },
                     new Setter { Property = Xamarin.Forms.Editor.TextColorProperty, Value = Editor.TextColor },
                     new Setter { Property = Xamarin.Forms.Editor.FontSizeProperty, Value = Editor.TextSize },
+                    new Setter { Property = Xamarin.Forms.Editor.MarginProperty, Value = Editor.Margin }
+                }
+            };
+        }
+
+        public Style GetStyleForSwitches()
+        {
+            return new Style(typeof(Switch)) {
+                Setters = {
                     new Setter { Property = Xamarin.Forms.Editor.MarginProperty, Value = Editor.Margin }
                 }
             };

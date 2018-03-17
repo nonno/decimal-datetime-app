@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
@@ -14,9 +15,9 @@ namespace DecimalTime.Forms.Views
             set => SetValue(DecimalDateTimeProperty, value);
         }
 
-        private BoxView secondHand;
-        private BoxView minuteHand;
-        private BoxView hourHand;
+        private BoxView secondsHand;
+        private BoxView minutesHand;
+        private BoxView hoursHand;
 
         private BoxView[] tickMarks = new BoxView[100];
 
@@ -30,21 +31,31 @@ namespace DecimalTime.Forms.Views
         protected override void OnParentSet()
         {
             CreateElements();
+            SetupBindings();
 
             base.OnParentSet();
         }
 
         private void CreateElements()
         {
-            var tickMarksColor = Color.FromHex(_settingsProvider.TickMarksColor);
             for (int i = 0; i < tickMarks.Length; i++) {
-                tickMarks[i] = new BoxView { Color = tickMarksColor };
+                tickMarks[i] = new BoxView { BindingContext = _settingsProvider };
                 this.Children.Add(tickMarks[i]);
             }
 
-            this.Children.Add(hourHand = new BoxView { Color = Color.FromHex(_settingsProvider.HoursHandColor) });
-            this.Children.Add(minuteHand = new BoxView { Color = Color.FromHex(_settingsProvider.MinutesHandColor) });
-            this.Children.Add(secondHand = new BoxView { Color = Color.FromHex(_settingsProvider.SecondsHandColor) });
+            this.Children.Add(hoursHand = new BoxView { BindingContext = _settingsProvider });
+            this.Children.Add(minutesHand = new BoxView { BindingContext = _settingsProvider });
+            this.Children.Add(secondsHand = new BoxView { BindingContext = _settingsProvider });
+        }
+
+        private void SetupBindings()
+        {
+            foreach (var tickMark in tickMarks) {
+                tickMark.SetBinding(BoxView.ColorProperty, nameof(SettingsProvider.TickMarksColor));
+            }
+            hoursHand.SetBinding(BoxView.ColorProperty, nameof(SettingsProvider.HoursHandColor));
+            minutesHand.SetBinding(BoxView.ColorProperty, nameof(SettingsProvider.MinutesHandColor));
+            secondsHand.SetBinding(BoxView.ColorProperty, nameof(SettingsProvider.SecondsHandColor));
         }
 
         public void OnPageSizeChanged(object sender, EventArgs args)
@@ -64,9 +75,9 @@ namespace DecimalTime.Forms.Views
         {
             var dateTime = DecimalDateTime;
 
-            hourHand.Rotation = 36 * dateTime.RepublicanHours + 0.36 * dateTime.RepublicanMinutes;
-            minuteHand.Rotation = 3.6 * dateTime.RepublicanMinutes + 0.036 * dateTime.RepublicanSeconds;
-            secondHand.Rotation = 3.6 * (dateTime.RepublicanSeconds);
+            hoursHand.Rotation = 36 * dateTime.RepublicanHours + 0.36 * dateTime.RepublicanMinutes;
+            minutesHand.Rotation = 3.6 * dateTime.RepublicanMinutes + 0.036 * dateTime.RepublicanSeconds;
+            secondsHand.Rotation = 3.6 * (dateTime.RepublicanSeconds);
         }
 
         private void SetupTickMarks(Point center, double radius)
@@ -98,9 +109,9 @@ namespace DecimalTime.Forms.Views
                 boxView.AnchorY = handParams.Offset;
             };
 
-            HandLayout(secondHand, new HandParams(0.02, 1.1, 0.85));
-            HandLayout(minuteHand, new HandParams(0.05, 0.8, 0.9));
-            HandLayout(hourHand, new HandParams(0.125, 0.65, 0.9));
+            HandLayout(secondsHand, new HandParams(0.02, 1.1, 0.85));
+            HandLayout(minutesHand, new HandParams(0.05, 0.8, 0.9));
+            HandLayout(hoursHand, new HandParams(0.125, 0.65, 0.9));
         }
 
         private struct HandParams

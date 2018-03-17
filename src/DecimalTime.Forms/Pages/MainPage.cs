@@ -52,15 +52,13 @@ namespace DecimalTime.Forms.Pages
                 Aspect = Aspect.AspectFill
             };
 
-            dateLabel = new Label {
+            dateLabel = new DateLabel {
                 FontSize = 24,
-                TextColor = Color.FromHex(_settingsProvider.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
             };
-            dateNameLabel = new Label {
+            dateNameLabel = new DateLabel {
                 FontSize = 24,
-                TextColor = Color.FromHex(_settingsProvider.DateLabelColor),
                 VerticalTextAlignment = TextAlignment.Center,
                 HorizontalTextAlignment = TextAlignment.Center
             };
@@ -87,12 +85,14 @@ namespace DecimalTime.Forms.Pages
 
         private void SetupBindings()
         {
-            this.SetBinding(MainPage.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
-
+            this.SetBinding(VisualElement.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
             backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
+            backgroundImage.SetBinding(VisualElement.IsVisibleProperty, nameof(MainPageModel.BackgroundImageVisible));
             clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.TwoWay);
-            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter(IoC.Settings));
+            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToShortFormatConverter(_settingsProvider));
+            dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor), BindingMode.TwoWay);
             dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToDayNameConverter());
+            dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
 
             settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
         }

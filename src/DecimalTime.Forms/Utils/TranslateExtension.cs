@@ -40,7 +40,8 @@ namespace DecimalTime.Forms.Utils
                     "Text"
                 );
 #else
-                translation = Text; // returns the key, which GETS DISPLAYED TO THE USER
+                var prefixLength = 3;
+                translation = Text.Substring(prefixLength, Text.Length - prefixLength); // returns the key, which GETS DISPLAYED TO THE USER
 #endif
             }
             return translation;

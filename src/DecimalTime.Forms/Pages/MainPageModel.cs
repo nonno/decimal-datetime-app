@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace DecimalTime.Forms.Pages
 {
-    public class MainPageModel : INotifyPropertyChanged
+    public class MainPageModel : PropertyChangedNotifier
     {
         private INavigation _navigation;
         private AnalyticsService _analyticsService;
@@ -41,7 +41,7 @@ namespace DecimalTime.Forms.Pages
                 if (_dateTime == value) return;
 
                 _dateTime = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DateTime)));
+                OnPropertyChanged(nameof(DateTime));
             }
         }
 
@@ -53,7 +53,7 @@ namespace DecimalTime.Forms.Pages
                 if (_decimalDateTime == value) return;
 
                 _decimalDateTime = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(DecimalDateTime)));
+                OnPropertyChanged(nameof(DecimalDateTime));
             }
         }
 
@@ -65,7 +65,7 @@ namespace DecimalTime.Forms.Pages
                 if (_calendarImageFile == value) return;
 
                 _calendarImageFile = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalendarImageFile)));
+                OnPropertyChanged(nameof(CalendarImageFile));
             }
         }
 
@@ -73,9 +73,19 @@ namespace DecimalTime.Forms.Pages
             get => _settingsProvider.BackgroundColor;
         }
 
+        public string DateLabelColor {
+            get => _settingsProvider.DateLabelColor;
+        }
+
+        public bool BackgroundImageVisible {
+            get => _settingsProvider.ShowBackgroundImage;
+        }
+
         public ICommand SpeakCommand => new Command(Speak);
         private void Speak()
         {
+            if (!_settingsProvider.EnableReaderOnDoubleTap) return;
+                
             var now = DecimalDateTime;
             var nowSpeak =
                 $"{now.ToString("hh:mm")}; " +
@@ -116,7 +126,5 @@ namespace DecimalTime.Forms.Pages
 
             return true;
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

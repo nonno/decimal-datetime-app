@@ -59,6 +59,12 @@ namespace DecimalTime.Forms.i18n {
             }
         }
         
+        internal static string lblBackgroundColor {
+            get {
+                return ResourceManager.GetString("lblBackgroundColor", resourceCulture);
+            }
+        }
+        
         internal static string lblDateFormatLong {
             get {
                 return ResourceManager.GetString("lblDateFormatLong", resourceCulture);
@@ -71,9 +77,51 @@ namespace DecimalTime.Forms.i18n {
             }
         }
         
+        internal static string lblDateLabelColor {
+            get {
+                return ResourceManager.GetString("lblDateLabelColor", resourceCulture);
+            }
+        }
+        
+        internal static string lblEnableReaderOnDoubleTap {
+            get {
+                return ResourceManager.GetString("lblEnableReaderOnDoubleTap", resourceCulture);
+            }
+        }
+        
+        internal static string lblHoursHandColor {
+            get {
+                return ResourceManager.GetString("lblHoursHandColor", resourceCulture);
+            }
+        }
+        
+        internal static string lblMinutesHandColor {
+            get {
+                return ResourceManager.GetString("lblMinutesHandColor", resourceCulture);
+            }
+        }
+        
+        internal static string lblSecondsHandColor {
+            get {
+                return ResourceManager.GetString("lblSecondsHandColor", resourceCulture);
+            }
+        }
+        
         internal static string lblSettingsPageTitle {
             get {
                 return ResourceManager.GetString("lblSettingsPageTitle", resourceCulture);
+            }
+        }
+        
+        internal static string lblShowBackgroundImage {
+            get {
+                return ResourceManager.GetString("lblShowBackgroundImage", resourceCulture);
+            }
+        }
+        
+        internal static string lblTickMarksColor {
+            get {
+                return ResourceManager.GetString("lblTickMarksColor", resourceCulture);
             }
         }
     }

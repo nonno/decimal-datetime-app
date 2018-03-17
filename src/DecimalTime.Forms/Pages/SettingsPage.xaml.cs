@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
 using Xamarin.Forms;
 
@@ -9,8 +10,7 @@ namespace DecimalTime.Forms.Pages
     {
         public SettingsPage()
         {
-            var pageModel = new SettingsPageModel(Navigation, IoC.Settings);
-            BindingContext = pageModel;
+            BindingContext = new SettingsPageModel(Navigation);
 
             InitializeComponent();
         }

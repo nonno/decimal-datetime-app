@@ -7,14 +7,38 @@
     <data name="btnClose" xml:space="preserve">
         <value>Chiudi</value>
     </data>
+    <data name="lblBackgroundColor" xml:space="preserve">
+        <value>Colore di sfondo</value>
+    </data>
     <data name="lblDateFormatLong" xml:space="preserve">
         <value>Formato esteso</value>
     </data>
     <data name="lblDateFormatShort" xml:space="preserve">
         <value>Formato breve</value>
     </data>
+    <data name="lblDateLabelColor" xml:space="preserve">
+        <value>Colore data</value>
+    </data>
+    <data name="lblEnableReaderOnDoubleTap" xml:space="preserve">
+        <value>Lettore al doppio tocco</value>
+    </data>
+    <data name="lblHoursHandColor" xml:space="preserve">
+        <value>Colore lancetta ore</value>
+    </data>
+    <data name="lblMinutesHandColor" xml:space="preserve">
+        <value>Colore lancetta minuti</value>
+    </data>
+    <data name="lblSecondsHandColor" xml:space="preserve">
+        <value>Colore lancetta secondi</value>
+    </data>
     <data name="lblSettingsPageTitle" xml:space="preserve">
         <value>Impostazioni</value>
+    </data>
+    <data name="lblShowBackgroundImage" xml:space="preserve">
+        <value>Visualizza immagine sfondo</value>
+    </data>
+    <data name="lblTickMarksColor" xml:space="preserve">
+        <value>Colore trattini</value>
     </data>
 
     <resheader name="source-language">

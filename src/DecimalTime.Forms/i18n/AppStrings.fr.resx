@@ -7,14 +7,38 @@
     <data name="btnClose" xml:space="preserve">
         <value>Ferme</value>
     </data>
+    <data name="lblBackgroundColor" xml:space="preserve">
+        <value>Couleur de fond</value>
+    </data>
     <data name="lblDateFormatLong" xml:space="preserve">
         <value>Format étendu</value>
     </data>
     <data name="lblDateFormatShort" xml:space="preserve">
         <value>Format court</value>
     </data>
+    <data name="lblDateLabelColor" xml:space="preserve">
+        <value>Couleur de la date</value>
+    </data>
+    <data name="lblEnableReaderOnDoubleTap" xml:space="preserve">
+        <value>Lecteur en double-cliquant</value>
+    </data>
+    <data name="lblHoursHandColor" xml:space="preserve">
+        <value>Couleur des heures</value>
+    </data>
+    <data name="lblMinutesHandColor" xml:space="preserve">
+        <value>Couleur des minutes</value>
+    </data>
+    <data name="lblSecondsHandColor" xml:space="preserve">
+        <value>Couleur des secondes</value>
+    </data>
     <data name="lblSettingsPageTitle" xml:space="preserve">
         <value>Paramètres</value>
+    </data>
+    <data name="lblShowBackgroundImage" xml:space="preserve">
+        <value>Montrer l'image de fond</value>
+    </data>
+    <data name="lblTickMarksColor" xml:space="preserve">
+        <value>Couleur marques de graduation</value>
     </data>
 
     <resheader name="source-language">

@@ -31,6 +31,7 @@ namespace DecimalTime.Forms
                 styleProvider.GetStyleForLabels(),
                 styleProvider.GetStyleForEntries(),
                 styleProvider.GetStyleForEditors(),
+                styleProvider.GetStyleForSwitches(),
                 styleProvider.GetStyleForPages()
             };
             return resources;
