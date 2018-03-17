@@ -19,6 +19,8 @@ namespace DecimalTime.Forms.Pages
         public ICommand CloseCommand => new Command(Close);
         private void Close()
         {
+            MessagingCenter.Send(this, MainPage.RefreshUiEvent);
+
             _navigation.PopModalAsync();
         }
     }

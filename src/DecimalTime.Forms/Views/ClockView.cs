@@ -48,7 +48,7 @@ namespace DecimalTime.Forms.Views
             this.Children.Add(secondsHand = new BoxView { BindingContext = _settingsProvider });
         }
 
-        private void SetupBindings()
+        public void SetupBindings()
         {
             foreach (var tickMark in tickMarks) {
                 tickMark.SetBinding(BoxView.ColorProperty, nameof(SettingsProvider.TickMarksColor));

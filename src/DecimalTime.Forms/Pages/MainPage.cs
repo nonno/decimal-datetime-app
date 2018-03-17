@@ -11,6 +11,8 @@ namespace DecimalTime.Forms.Pages
 {
     public class MainPage : ContentPage
     {
+        public const string RefreshUiEvent = nameof(RefreshUiEvent);
+
         private SettingsProvider _settingsProvider;
 
         private AbsoluteLayout contentContainer;
@@ -35,6 +37,12 @@ namespace DecimalTime.Forms.Pages
             SetupControls();
 
             SetupBindings();
+
+            MessagingCenter.Subscribe<SettingsPageModel>(this, RefreshUiEvent, (sender) => {
+                // TODO temporary fix, downgrade clockView.SetupBindings to private
+                SetupBindings();
+                clockView.SetupBindings();
+            });
 
             pageDoubleTapRecognizer = new TapGestureRecognizer { NumberOfTapsRequired = 2 };
             pageDoubleTapRecognizer.Tapped += Page_DoubleTapped;
@@ -93,7 +101,6 @@ namespace DecimalTime.Forms.Pages
             dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor), BindingMode.TwoWay);
             dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), BindingMode.OneWay, new DecimalDateTimeToDayNameConverter());
             dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
-
             settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
         }
 

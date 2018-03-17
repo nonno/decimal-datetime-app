@@ -14,7 +14,7 @@ namespace DecimalTime.Droid.Services
         {
             toSpeak = text;
             if (speaker == null) {
-                var context = Xamarin.Forms.Forms.Context;
+                var context = Android.App.Application.Context;
                 speaker = new TextToSpeech(context, this);
             } else {
                 speaker.Speak(toSpeak, QueueMode.Flush, null, null);

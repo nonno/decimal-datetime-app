@@ -70,12 +70,12 @@ namespace DecimalTime.Forms.Services
 		{
 			return new Style(typeof(Button)) {
 				Setters = {
+                    new Setter { Property = VisualElement.BackgroundColorProperty, Value = Accent.BackgroundColor },
+                    new Setter { Property = View.MarginProperty, Value = Regular.Margin },
 					new Setter { Property = Button.FontFamilyProperty, Value = FontFamily },
-					new Setter { Property = Button.BackgroundColorProperty, Value = Accent.BackgroundColor },
 					new Setter { Property = Button.TextColorProperty, Value = Accent.TextColor },
 					new Setter { Property = Button.FontSizeProperty, Value = Accent.TextSize },
-					new Setter { Property = Button.CornerRadiusProperty, Value = 0 },
-                    new Setter { Property = Button.MarginProperty, Value = Regular.Margin }
+					new Setter { Property = Button.CornerRadiusProperty, Value = 0 }
                 }
 			};
 		}
@@ -84,11 +84,11 @@ namespace DecimalTime.Forms.Services
 		{
 			return new Style(typeof(Label)) {
 				Setters = {
+                    new Setter { Property = VisualElement.BackgroundColorProperty, Value = Color.Transparent },
+                    new Setter { Property = View.MarginProperty, Value = Regular.Margin },
 					new Setter { Property = Label.FontFamilyProperty, Value = FontFamily },
-					new Setter { Property = Label.BackgroundColorProperty, Value = Color.Transparent },
 					new Setter { Property = Label.TextColorProperty, Value = Regular.TextColor },
-					new Setter { Property = Label.FontSizeProperty, Value = Regular.TextSize },
-                    new Setter { Property = Label.MarginProperty, Value = Regular.Margin }
+					new Setter { Property = Label.FontSizeProperty, Value = Regular.TextSize }
 				}
 			};
 		}
@@ -97,7 +97,7 @@ namespace DecimalTime.Forms.Services
 		{
 			return new Style(typeof(Page)) {
 				Setters = {
-					new Setter { Property = Page.BackgroundColorProperty, Value = Regular.BackgroundColor },
+                    new Setter { Property = VisualElement.BackgroundColorProperty, Value = Regular.BackgroundColor }
 				}
 			};
 		}
@@ -106,10 +106,10 @@ namespace DecimalTime.Forms.Services
 		{
 			return new Style(typeof(Entry)) {
 				Setters = {
-					new Setter { Property = Entry.BackgroundColorProperty, Value = Editor.BackgroundColor },
+                    new Setter { Property = VisualElement.BackgroundColorProperty, Value = Editor.BackgroundColor },
+                    new Setter { Property = View.MarginProperty, Value = Editor.Margin },
 					new Setter { Property = Entry.TextColorProperty, Value = Editor.TextColor },
-                    new Setter { Property = Entry.FontSizeProperty, Value = Editor.TextSize },
-                    new Setter { Property = Entry.MarginProperty, Value = Editor.Margin }
+                    new Setter { Property = Entry.FontSizeProperty, Value = Editor.TextSize }
 				}
 			};
 		}
@@ -118,10 +118,10 @@ namespace DecimalTime.Forms.Services
         {
             return new Style(typeof(Editor)) {
                 Setters = {
-                    new Setter { Property = Xamarin.Forms.Editor.BackgroundColorProperty, Value = Editor.BackgroundColor },
+                    new Setter { Property = VisualElement.BackgroundColorProperty, Value = Editor.BackgroundColor },
+                    new Setter { Property = View.MarginProperty, Value = Editor.Margin },
                     new Setter { Property = Xamarin.Forms.Editor.TextColorProperty, Value = Editor.TextColor },
-                    new Setter { Property = Xamarin.Forms.Editor.FontSizeProperty, Value = Editor.TextSize },
-                    new Setter { Property = Xamarin.Forms.Editor.MarginProperty, Value = Editor.Margin }
+                    new Setter { Property = Xamarin.Forms.Editor.FontSizeProperty, Value = Editor.TextSize }
                 }
             };
         }
@@ -130,7 +130,8 @@ namespace DecimalTime.Forms.Services
         {
             return new Style(typeof(Switch)) {
                 Setters = {
-                    new Setter { Property = Xamarin.Forms.Editor.MarginProperty, Value = Editor.Margin }
+                    new Setter { Property = View.HorizontalOptionsProperty, Value = LayoutOptions.StartAndExpand },
+                    new Setter { Property = View.MarginProperty, Value = Editor.Margin }
                 }
             };
         }
