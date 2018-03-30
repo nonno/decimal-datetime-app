@@ -21,9 +21,9 @@ namespace DecimalTime.Forms.Views
 
         private BoxView[] tickMarks = new BoxView[100];
 
-        private SettingsProvider _settingsProvider;
+        private ISettingsProvider _settingsProvider;
 
-        public ClockView(SettingsProvider settingsProvider)
+        public ClockView(ISettingsProvider settingsProvider)
         {
             _settingsProvider = settingsProvider;
         }

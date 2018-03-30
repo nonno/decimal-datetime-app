@@ -8,11 +8,11 @@ using Plugin.Settings.Abstractions;
 
 namespace DecimalTime.Forms.Services
 {
-    public class SettingsProvider : PropertyChangedNotifier
+    public class SettingsProvider : PropertyChangedNotifier, ISettingsProvider
     {
         private ISettings AppSettings { get => CrossSettings.Current; }
 
-        private Dictionary<string, object> Defaults = new Dictionary<string, object> {
+        protected Dictionary<string, object> Defaults = new Dictionary<string, object> {
             {nameof(BackgroundColor), "#00000000"},
             {nameof(ShowBackgroundImage), true},
             {nameof(DateLabelColor), "#FFFFFFFF"},

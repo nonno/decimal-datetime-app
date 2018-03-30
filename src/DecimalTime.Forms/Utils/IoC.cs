@@ -16,8 +16,8 @@ namespace DecimalTime.Forms.Utils
             get { return ResolveObject<ILocalizationService>(); }
         }
 
-        public static SettingsProvider Settings {
-            get { return ResolveObject<SettingsProvider>(); }
+        public static ISettingsProvider Settings {
+            get { return ResolveObject<ISettingsProvider>(); }
         }
 
         public static ITextToSpeechService TTS {

@@ -7,9 +7,9 @@ namespace DecimalTime.Forms.Converters
 {
     public class DecimalDateTimeToShortFormatConverter : IValueConverter
     {
-        private SettingsProvider _settingsProvider;
+        private ISettingsProvider _settingsProvider;
 
-        public DecimalDateTimeToShortFormatConverter(SettingsProvider settingsProvider)
+        public DecimalDateTimeToShortFormatConverter(ISettingsProvider settingsProvider)
         {
             _settingsProvider = settingsProvider;
         }

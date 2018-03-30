@@ -35,7 +35,7 @@ namespace DecimalTime.iOS
             containerBuilder.RegisterType<FirebaseAnalyticsService>().As<AnalyticsService>().SingleInstance();
             containerBuilder.RegisterType<TextToSpeechService>().As<ITextToSpeechService>().SingleInstance();
             containerBuilder.RegisterType<LocalizationService>().As<ILocalizationService>().SingleInstance();
-            containerBuilder.RegisterType<SettingsProvider>().As<SettingsProvider>().SingleInstance();
+            containerBuilder.RegisterType<SettingsProvider>().As<ISettingsProvider>().SingleInstance();
             IoC.Container = containerBuilder.Build();
         }
 
