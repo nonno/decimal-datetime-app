@@ -2,8 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="DecimalTime.Forms.Pages.SettingsPage"
+    xmlns:customControls="clr-namespace:DecimalTime.Forms.Controls;assembly=DecimalTime.Forms"
     xmlns:local="clr-namespace:DecimalTime.Forms.Services;assembly=DecimalTime.Forms"
-    xmlns:i18n="clr-namespace:DecimalTime.Forms.Utils;assembly=DecimalTime.Forms"
+    xmlns:i18n="clr-namespace:DecimalTime.Forms.Utils"
     Title="{i18n:Translate lblSettingsPageTitle}">
     
     <ContentPage.Padding>
@@ -18,35 +19,35 @@
         <ScrollView Orientation="Vertical" VerticalOptions="FillAndExpand">
             <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand">
                 <Label Text="{i18n:Translate lblBackgroundColor}"/>
-                <Entry Text="{Binding BackgroundColor}">
+                <customControls:ColorSelector Text="{Binding BackgroundColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
                 <Label Text="{i18n:Translate lblShowBackgroundImage}"/>
                 <Switch IsToggled="{Binding ShowBackgroundImage}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
                 </Switch>
 
                 <Label Text="{i18n:Translate lblDateLabelColor}"/>
-                <Entry Text="{Binding DateLabelColor}">
+                <customControls:ColorSelector Text="{Binding DateLabelColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
                 
                 <Label Text="{i18n:Translate lblHoursHandColor}"/>
-                <Entry Text="{Binding HoursHandColor}">
+                <customControls:ColorSelector Text="{Binding HoursHandColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
                 <Label Text="{i18n:Translate lblMinutesHandColor}"/>
-                <Entry Text="{Binding MinutesHandColor}">
+                <customControls:ColorSelector Text="{Binding MinutesHandColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
                 <Label Text="{i18n:Translate lblSecondsHandColor}"/>
-                <Entry Text="{Binding SecondsHandColor}">
+                <customControls:ColorSelector Text="{Binding SecondsHandColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
                 <Label Text="{i18n:Translate lblTickMarksColor}"/>
-                <Entry Text="{Binding TickMarksColor}">
+                <customControls:ColorSelector Text="{Binding TickMarksColor}">
                     <Entry.BindingContext><local:SettingsProvider /></Entry.BindingContext>
-                </Entry>
+                </customControls:ColorSelector>
 
                 <Label Text="{i18n:Translate lblEnableReaderOnDoubleTap}"/>
                 <Switch IsToggled="{Binding EnableReaderOnDoubleTap}">

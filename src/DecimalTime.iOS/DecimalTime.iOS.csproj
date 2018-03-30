@@ -98,6 +98,8 @@
     <Compile Include="Services\*.cs" />
     <None Include="Entitlements.plist" />
     <None Include="xamarin_upload_symbols.sh" />
+    <Compile Include="Renderers\BorderlessEntryRenderer.cs" />
+    <Compile Include="Renderers\ColorSelectorRenderer.cs" />
   </ItemGroup>
   <ItemGroup></ItemGroup>
   <ItemGroup>
@@ -140,11 +142,15 @@
     <Reference Include="Plugin.Settings">
       <HintPath>..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.dll</HintPath>
     </Reference>
+    <Reference Include="AdvancedColorPicker">
+      <HintPath>..\packages\AdvancedColorPicker.2.0.1\lib\Xamarin.iOS\AdvancedColorPicker.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Services\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
