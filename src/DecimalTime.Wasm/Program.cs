@@ -1,10 +1,4 @@
 ﻿using System;
-using Autofac;
-using DecimalTime.Forms.Pages;
-using DecimalTime.Forms.Services;
-using DecimalTime.Forms.Utils;
-using Ooui;
-using Xamarin.Forms;
 
 namespace DecimalTime.Wasm
 {
@@ -13,14 +7,7 @@ namespace DecimalTime.Wasm
         static void Main(string[] args)
         {
             Xamarin.Forms.Forms.Init();
-
-            var containerBuilder = new ContainerBuilder();
-            containerBuilder.RegisterType<Services.SettingsProvider>().As<ISettingsProvider>().SingleInstance();
-            IoC.Container = containerBuilder.Build();
-
-            var page = new MainPage(IoC.Settings);
-
-            UI.Publish("/", page.GetOouiElement());
+            Xamarin.Forms.Forms.LoadApplication(new App());
         }
     }
 }

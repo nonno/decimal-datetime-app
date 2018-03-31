@@ -13,7 +13,7 @@ namespace DecimalTime.Forms.Services
         private ISettings AppSettings { get => CrossSettings.Current; }
 
         protected Dictionary<string, object> Defaults = new Dictionary<string, object> {
-            {nameof(BackgroundColor), "#00000000"},
+            {nameof(BackgroundColor), "#FF000000"},
             {nameof(ShowBackgroundImage), true},
             {nameof(DateLabelColor), "#FFFFFFFF"},
             {nameof(TickMarksColor), "#FFFFFFFF"},
