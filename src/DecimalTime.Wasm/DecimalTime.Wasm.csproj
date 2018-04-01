@@ -10,7 +10,7 @@
     <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="Ooui.Wasm" Version="0.9.206" />
     <PackageReference Include="Ooui.Forms" Version="0.9.206" />
-    <PackageReference Include="Decimal.DateTime" Version="1.4.1" />
+    <PackageReference Include="Decimal.DateTime" Version="1.4.3" />
   </ItemGroup>
 
   <ItemGroup>
