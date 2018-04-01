@@ -2,9 +2,9 @@
 
 namespace DecimalTime.Wasm.Services
 {
-    public class SettingsProvider : Forms.Services.SettingsProvider
+    public sealed class SettingsProvider : Forms.Services.SettingsProvider
     {
-        public new string BackgroundColor {
+        public override string BackgroundColor {
             get {
                 return (string)Defaults[nameof(BackgroundColor)];
             }
@@ -13,7 +13,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new bool ShowBackgroundImage {
+        public override bool ShowBackgroundImage {
             get {
                 return (bool)Defaults[nameof(ShowBackgroundImage)];
             }
@@ -22,7 +22,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string DateLabelColor
+        public override string DateLabelColor
         {
             get {
                 return (string)Defaults[nameof(DateLabelColor)];
@@ -33,7 +33,7 @@ namespace DecimalTime.Wasm.Services
         }
 
         #region ClockView
-        public new string TickMarksColor
+        public override string TickMarksColor
         {
             get {
                 return (string)Defaults[nameof(TickMarksColor)];
@@ -43,7 +43,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string HoursHandColor
+        public override string HoursHandColor
         {
             get {
                 return (string)Defaults[nameof(HoursHandColor)];
@@ -53,7 +53,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string MinutesHandColor
+        public override string MinutesHandColor
         {
             get {
                 return (string)Defaults[nameof(MinutesHandColor)];
@@ -63,7 +63,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string SecondsHandColor
+        public override string SecondsHandColor
         {
             get {
                 return (string)Defaults[nameof(SecondsHandColor)];
@@ -74,7 +74,7 @@ namespace DecimalTime.Wasm.Services
         }
         #endregion
 
-        public new bool EnableReaderOnDoubleTap {
+        public override bool EnableReaderOnDoubleTap {
             get {
                 return (bool)Defaults[nameof(EnableReaderOnDoubleTap)];
             }
@@ -83,7 +83,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string ShortFormat {
+        public override string ShortFormat {
             get {
                 return (string)Defaults[nameof(ShortFormat)];
             }
@@ -92,7 +92,7 @@ namespace DecimalTime.Wasm.Services
             }
         }
 
-        public new string LongFormat {
+        public override string LongFormat {
             get {
                 return (string)Defaults[nameof(LongFormat)];
             }

@@ -25,7 +25,7 @@ namespace DecimalTime.Forms.Services
             {nameof(LongFormat), "ddd d MMMM MMM M yyy, hh:mm:ss"}
         };
 
-        public string BackgroundColor {
+        public virtual string BackgroundColor {
             get {
                 return AppSettings.GetValueOrDefault(nameof(BackgroundColor), (string)Defaults[nameof(BackgroundColor)]);
             }
@@ -35,7 +35,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public bool ShowBackgroundImage {
+        public virtual bool ShowBackgroundImage {
             get {
                 return AppSettings.GetValueOrDefault(nameof(ShowBackgroundImage), (bool)Defaults[nameof(ShowBackgroundImage)]);
             }
@@ -45,7 +45,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string DateLabelColor
+        public virtual string DateLabelColor
         {
             get {
                 return AppSettings.GetValueOrDefault(nameof(DateLabelColor), (string)Defaults[nameof(DateLabelColor)]);
@@ -57,7 +57,7 @@ namespace DecimalTime.Forms.Services
         }
 
         #region ClockView
-        public string TickMarksColor
+        public virtual string TickMarksColor
         {
             get {
                 return AppSettings.GetValueOrDefault(nameof(TickMarksColor), (string)Defaults[nameof(TickMarksColor)]);
@@ -68,7 +68,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string HoursHandColor
+        public virtual string HoursHandColor
         {
             get {
                 return AppSettings.GetValueOrDefault(nameof(HoursHandColor), (string)Defaults[nameof(HoursHandColor)]);
@@ -79,7 +79,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string MinutesHandColor
+        public virtual string MinutesHandColor
         {
             get {
                 return AppSettings.GetValueOrDefault(nameof(MinutesHandColor), (string)Defaults[nameof(MinutesHandColor)]);
@@ -90,7 +90,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string SecondsHandColor
+        public virtual string SecondsHandColor
         {
             get {
                 return AppSettings.GetValueOrDefault(nameof(SecondsHandColor), (string)Defaults[nameof(SecondsHandColor)]);
@@ -102,7 +102,7 @@ namespace DecimalTime.Forms.Services
         }
         #endregion
 
-        public bool EnableReaderOnDoubleTap {
+        public virtual bool EnableReaderOnDoubleTap {
             get {
                 return AppSettings.GetValueOrDefault(nameof(EnableReaderOnDoubleTap), (bool)Defaults[nameof(EnableReaderOnDoubleTap)]);
             }
@@ -112,7 +112,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string ShortFormat {
+        public virtual string ShortFormat {
             get {
                 return AppSettings.GetValueOrDefault(nameof(ShortFormat), (string)Defaults[nameof(ShortFormat)]);
             }
@@ -122,7 +122,7 @@ namespace DecimalTime.Forms.Services
             }
         }
 
-        public string LongFormat {
+        public virtual string LongFormat {
             get {
                 return AppSettings.GetValueOrDefault(nameof(LongFormat), (string)Defaults[nameof(LongFormat)]);
             }

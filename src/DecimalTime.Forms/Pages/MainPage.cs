@@ -14,22 +14,22 @@ namespace DecimalTime.Forms.Pages
     {
         public const string RefreshUiEvent = nameof(RefreshUiEvent);
 
-        private ISettingsProvider _settingsProvider;
+        protected ISettingsProvider settingsProvider;
 
-        private AbsoluteLayout contentContainer;
+        protected AbsoluteLayout contentContainer;
 
-        private Label dateLabel;
-        private Label dateNameLabel;
+        protected Label dateLabel;
+        protected Label dateNameLabel;
 
-        private ClockView clockView;
-        private Image backgroundImage;
-        private Button settingsButton;
+        protected ClockView clockView;
+        protected Image backgroundImage;
+        protected Button settingsButton;
 
         private readonly TapGestureRecognizer pageDoubleTapRecognizer;
 
         public MainPage(ISettingsProvider settingsProvider)
         {
-            _settingsProvider = settingsProvider;
+            this.settingsProvider = settingsProvider;
 
             var pageModel = new MainPageModel(Navigation, IoC.Analytics, IoC.Settings, IoC.TTS);
             BindingContext = pageModel;
@@ -55,7 +55,7 @@ namespace DecimalTime.Forms.Pages
         {
             contentContainer = new AbsoluteLayout();
 
-            clockView = new ClockView(_settingsProvider);
+            clockView = new ClockView(settingsProvider);
 
             backgroundImage = new Image {
                 Aspect = Aspect.AspectFill
@@ -94,33 +94,15 @@ namespace DecimalTime.Forms.Pages
 
         private void SetupBindings()
         {
-            try {
-                this.SetBinding(VisualElement.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                backgroundImage.SetBinding(VisualElement.IsVisibleProperty, nameof(MainPageModel.BackgroundImageVisible));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToShortFormatConverter(_settingsProvider));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToDayNameConverter());
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
-            try {
-                settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
-            } catch (Exception ex) { Debug.WriteLine(ex.Message); }
+            this.SetBinding(VisualElement.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
+            backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
+            backgroundImage.SetBinding(VisualElement.IsVisibleProperty, nameof(MainPageModel.BackgroundImageVisible));
+            clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime));
+            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToShortFormatConverter(settingsProvider));
+            dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
+            dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToDayNameConverter());
+            dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
+            settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
         }
 
         private void SetupControlsPositions()

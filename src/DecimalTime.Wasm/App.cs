@@ -3,6 +3,7 @@ using Autofac;
 using DecimalTime.Forms.Pages;
 using DecimalTime.Forms.Services;
 using DecimalTime.Forms.Utils;
+using DecimalTime.Wasm.Pages;
 using Xamarin.Forms;
 
 namespace DecimalTime.Wasm
@@ -15,7 +16,7 @@ namespace DecimalTime.Wasm
             containerBuilder.RegisterType<Services.SettingsProvider>().As<ISettingsProvider>().SingleInstance();
             IoC.Container = containerBuilder.Build();
 
-            MainPage = new MainPage(IoC.Settings);
+            MainPage = new CustomMainPage(IoC.Settings);
         }
     }
 }
