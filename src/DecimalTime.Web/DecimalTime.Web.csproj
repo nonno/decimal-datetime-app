@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <ReleaseVersion></ReleaseVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Services\" />
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Ooui" Version="0.9.206" />
+    <PackageReference Include="Ooui.Forms" Version="0.9.206" />
+    <PackageReference Include="Ooui.AspNetCore" Version="0.9.206" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DecimalTime.Forms\DecimalTime.Forms.csproj" />
+  </ItemGroup>
+</Project>
