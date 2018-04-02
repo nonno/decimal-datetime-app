@@ -10,6 +10,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Services\" />
     <Folder Include="Pages\" />
+    <Folder Include="Images\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,5 +27,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DecimalTime.Forms\DecimalTime.Forms.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Images\m13.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\m13.jpg" />
   </ItemGroup>
 </Project>

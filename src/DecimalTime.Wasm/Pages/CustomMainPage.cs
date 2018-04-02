@@ -10,7 +10,6 @@ namespace DecimalTime.Wasm.Pages
         public CustomMainPage(ISettingsProvider settingsProvider) : base(settingsProvider)
         {
             backgroundImage.RemoveBinding(Image.SourceProperty);
-            //backgroundImage.Source = ImageSource.FromResource("DecimalTime.Wasm.Images.m13.jpg", System.Reflection.Assembly.GetCallingAssembly());
             backgroundImage.IsVisible = false;
             settingsButton.IsVisible = false;
         }
