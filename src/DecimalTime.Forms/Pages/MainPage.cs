@@ -94,15 +94,22 @@ namespace DecimalTime.Forms.Pages
 
         private void SetupBindings()
         {
-            this.SetBinding(VisualElement.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
-            backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
-            backgroundImage.SetBinding(VisualElement.IsVisibleProperty, nameof(MainPageModel.BackgroundImageVisible));
-            clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime));
-            dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToShortFormatConverter(settingsProvider));
-            dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
-            dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToDayNameConverter());
-            dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
-            settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
+            try {
+                clockView.SetBinding(ClockView.DecimalDateTimeProperty, nameof(MainPageModel.DecimalDateTime));
+                backgroundImage.SetBinding(Image.SourceProperty, nameof(MainPageModel.CalendarImageFile));
+                dateLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToShortFormatConverter(settingsProvider));
+                settingsButton.SetBinding(Button.CommandProperty, nameof(MainPageModel.ShowSettingsCommand));
+
+                this.SetBinding(VisualElement.BackgroundColorProperty, nameof(MainPageModel.BackgroundColor));
+                backgroundImage.SetBinding(VisualElement.IsVisibleProperty, nameof(MainPageModel.BackgroundImageVisible));
+                dateLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
+                dateNameLabel.SetBinding(Label.TextProperty, nameof(MainPageModel.DecimalDateTime), converter: new DecimalDateTimeToDayNameConverter());
+                dateNameLabel.SetBinding(Label.TextColorProperty, nameof(MainPageModel.DateLabelColor));
+            } catch {
+                settingsProvider.Reset();
+                SetupBindings();
+                // TODO risk of loop?
+            }
         }
 
         private void SetupControlsPositions()

@@ -13,10 +13,10 @@ namespace DecimalTime.Forms.Services
         private ISettings AppSettings { get => CrossSettings.Current; }
 
         protected Dictionary<string, object> Defaults = new Dictionary<string, object> {
-            {nameof(BackgroundColor), "#FF000000"},
+            {nameof(BackgroundColor), "black"},
             {nameof(ShowBackgroundImage), true},
-            {nameof(DateLabelColor), "#FFFFFFFF"},
-            {nameof(TickMarksColor), "#FFFFFFFF"},
+            {nameof(DateLabelColor), "white"},
+            {nameof(TickMarksColor), "white"},
             {nameof(HoursHandColor), "#FF83CBC4"},
             {nameof(MinutesHandColor), "#FF9CCBC4"},
             {nameof(SecondsHandColor), "#FFB4CBC4"},
@@ -24,6 +24,20 @@ namespace DecimalTime.Forms.Services
             {nameof(ShortFormat), "d MMMM yyy"},
             {nameof(LongFormat), "ddd d MMMM MMM M yyy, hh:mm:ss"}
         };
+
+        public virtual void Reset()
+        {
+            BackgroundColor = (string)Defaults[nameof(BackgroundColor)];
+            ShowBackgroundImage = (bool)Defaults[nameof(ShowBackgroundImage)];
+            DateLabelColor = (string)Defaults[nameof(DateLabelColor)];
+            TickMarksColor = (string)Defaults[nameof(TickMarksColor)];
+            HoursHandColor = (string)Defaults[nameof(HoursHandColor)];
+            MinutesHandColor = (string)Defaults[nameof(MinutesHandColor)];
+            SecondsHandColor = (string)Defaults[nameof(SecondsHandColor)];
+            EnableReaderOnDoubleTap = (bool)Defaults[nameof(EnableReaderOnDoubleTap)];
+            ShortFormat = (string)Defaults[nameof(ShortFormat)];
+            LongFormat = (string)Defaults[nameof(LongFormat)];
+        }
 
         public virtual string BackgroundColor {
             get {

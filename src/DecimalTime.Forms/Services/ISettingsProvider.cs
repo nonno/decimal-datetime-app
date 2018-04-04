@@ -24,5 +24,7 @@ namespace DecimalTime.Forms.Services
         string ShortFormat { get; set; }
 
         string LongFormat { get; set; }
+
+        void Reset();
     }
 }
