@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="it.mpic.decimaltime" android:installLocation="auto" android:versionName="1.1" android:versionCode="2">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="it.mpic.decimaltime" android:installLocation="auto" android:versionName="1.1.1" android:versionCode="2">
 	<uses-sdk android:minSdkVersion="16" android:targetSdkVersion="27" />
 	<application android:icon="@drawable/Icon" android:label="@string/ApplicationName" android:theme="@style/DecimalTimeTheme">
 		<meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_stat_ic_notification" />
