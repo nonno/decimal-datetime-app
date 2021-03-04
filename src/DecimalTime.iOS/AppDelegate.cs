@@ -64,9 +64,9 @@ namespace DecimalTime.iOS
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
             Firebase.InstanceID.InstanceId.Notifications.ObserveTokenRefresh((sender, e) => {
-                var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
+                //var newToken = Firebase.InstanceID.InstanceId.SharedInstance.Token;
                 // if you want to send notification per user, use this token
-                Console.WriteLine(newToken);
+                //Console.WriteLine(newToken);
 
                 ConnectFCM();
             });
@@ -74,7 +74,6 @@ namespace DecimalTime.iOS
 
         public override void DidEnterBackground(UIApplication uiApplication)
         {
-            Messaging.SharedInstance.ShouldEstablishDirectChannel = false;
         }
 
         public override void OnActivated(UIApplication uiApplication)
@@ -134,7 +133,6 @@ namespace DecimalTime.iOS
 
         private void ConnectFCM()
         {
-            Messaging.SharedInstance.ShouldEstablishDirectChannel = true;
         }
 
         private void ShowNotification(string title, string message)

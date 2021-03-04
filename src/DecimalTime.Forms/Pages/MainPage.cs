@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using DecimalTime.Forms.Controls;
 using DecimalTime.Forms.Converters;
 using DecimalTime.Forms.i18n;
@@ -75,7 +74,7 @@ namespace DecimalTime.Forms.Pages
             settingsButton = new SettingsButton {
                 BackgroundColor = Color.Transparent,
                 BorderColor = Color.Transparent,
-                Image = AppAssets.settingsIco
+                ImageSource = AppAssets.settingsIco
             };
 
             contentContainer.Children.Add(backgroundImage);

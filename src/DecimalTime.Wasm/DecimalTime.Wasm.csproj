@@ -8,9 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Decimal.DateTime" Version="1.4.3" />
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Ooui.Forms" Version="0.10.222" />
-    <PackageReference Include="Ooui.Wasm" Version="0.10.222" />
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Ooui.Forms" Version="0.12.309" />
+    <PackageReference Include="Ooui.Wasm" Version="0.12.309" />
   </ItemGroup>
 
   <ItemGroup>
